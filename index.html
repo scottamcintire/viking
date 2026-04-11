@@ -507,11 +507,13 @@ const days = [
   }
 ];
 
-const tripNotes = [
+const tripNotesTuesday = [
   {time:"Support", title:"Viking En Route Travel Support", desc:"Phone: +1-877-523-0576 · Text: +1-818-804-4699"},
-  {time:"Packing", title:"Must-have travel items", desc:"Converters: Type G for London and Type C for France / Amsterdam. Also corded headphones, Apple Pay setup, sleep mask, face mask, and backup battery."},
-  {time:"Cruise Credits", title:"Pre-purchased excursion totals", desc:"Each guest shows $464 retail, $250 credits applied, and $214 final price total for the listed pre-purchased items."},
-  {time:"Excursion Timing", title:"Departure times can change", desc:"Viking notes that shore excursion departure times are subject to change, so confirm on board with the Viking Daily."}
+  {time:"Packing", title:"Must-have travel items", desc:"Converters: Type G for London and Type C for France / Amsterdam. Also corded headphones, Apple Pay setup, sleep mask, face mask, and backup battery."}
+];
+
+const tripNotesSupportOnly = [
+  {time:"Support", title:"Viking En Route Travel Support", desc:"Phone: +1-877-523-0576 · Text: +1-818-804-4699"}
 ];
 
 let currentIndex = 0;
@@ -592,7 +594,8 @@ function renderDay() {
 
 function renderGlobalNotes() {
   globalNotes.innerHTML = "";
-  tripNotes.forEach(item => {
+  const notesToShow = currentIndex === 0 ? tripNotesTuesday : tripNotesSupportOnly;
+  notesToShow.forEach(item => {
     const div = document.createElement("div");
     div.className = "item";
     div.innerHTML = `
