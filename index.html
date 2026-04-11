@@ -14,6 +14,12 @@
     --accent:#0f766e;
     --accent2:#134e4a;
     --soft:#ecfdf5;
+    --warnbg:#fffbeb;
+    --warnline:#fde68a;
+    --warntext:#92400e;
+    --info:#eff6ff;
+    --infoline:#bfdbfe;
+    --infotext:#1d4ed8;
   }
   *{box-sizing:border-box}
   body{
@@ -80,7 +86,7 @@
   }
   .main{
     padding:24px;
-    max-width:980px;
+    max-width:1040px;
     width:100%;
     margin:0 auto;
   }
@@ -183,6 +189,15 @@
     border:1px solid var(--line);
     border-radius:14px;
     padding:14px;
+    background:#fff;
+  }
+  .item.highlight{
+    background:var(--warnbg);
+    border-color:var(--warnline);
+  }
+  .item.info{
+    background:var(--info);
+    border-color:var(--infoline);
   }
   .item-time{
     color:var(--accent2);
@@ -200,18 +215,35 @@
     line-height:1.5;
     font-size:15px;
   }
+  .item.highlight .item-time,
+  .item.highlight .item-title{color:var(--warntext)}
+  .item.info .item-time,
+  .item.info .item-title{color:var(--infotext)}
   .grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
   }
-  .note{
-    background:#fffbeb;
-    border:1px solid #fde68a;
-    border-radius:14px;
-    padding:14px;
-    color:#7c5e10;
-    line-height:1.5;
+  .support-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+  .support-card{
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:16px;
+    background:#fff;
+  }
+  .support-card h3{
+    margin:0 0 10px;
+    font-size:18px;
+  }
+  .support-card .line{
+    font-size:15px;
+    line-height:1.55;
+    margin:4px 0;
+    color:var(--text);
   }
   .footer-note{
     color:var(--muted);
@@ -225,7 +257,7 @@
     .mobile-jump{display:block}
   }
   @media (max-width: 640px){
-    .grid{grid-template-columns:1fr}
+    .grid,.support-grid{grid-template-columns:1fr}
     .hero h1{font-size:24px}
     .day-title h2{font-size:24px}
   }
@@ -235,7 +267,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="brand">Europe Trip</div>
-    <div class="sub">Scott & Cheryl McIntire<br>Day-by-day vacation itinerary</div>
+    <div class="sub">Scott & Cheryl McIntire<br>Working itinerary</div>
     <div class="day-list" id="dayList"></div>
   </aside>
 
@@ -246,7 +278,7 @@
 
     <section class="hero">
       <h1>McIntire Europe Vacation Itinerary</h1>
-      <p>Use the day buttons or Previous / Next to move through the trip. Each day has the main plan, logistics, and any shore excursions already booked.</p>
+      <p>Fast reference for flights, hotels, transfers, embarkation, and key day-of logistics.</p>
     </section>
 
     <div class="nav-row">
@@ -268,16 +300,11 @@
 
       <div class="section-title">Key details</div>
       <div class="grid" id="detailsGrid"></div>
-
-      <div class="section-title">Notes</div>
-      <div class="note" id="notesBox"></div>
-
-      <div class="footer-note">Version built from your itinerary document and your Viking pre-purchased excursions PDF.</div>
     </section>
 
     <section class="card">
-      <div class="section-title">Trip-wide reminders</div>
-      <div class="timeline" id="globalNotes"></div>
+      <div class="section-title">Trip support</div>
+      <div class="support-grid" id="supportGrid"></div>
     </section>
   </main>
 </div>
@@ -288,208 +315,200 @@ const days = [
     date: "Tuesday, April 14",
     label: "Boston → London",
     tag: "Travel Day",
-    summary: "British Airways flight from Boston to London, then get to the Knightsbridge Airbnb and settle in for the first night.",
+    summary: "British Airways nonstop from Boston to London, then check in at the Knightsbridge Airbnb.",
     timeline: [
-      {time:"7:25 AM", title:"Depart Boston on British Airways BA0238", desc:"Flight from BOS to London."},
-      {time:"Arrival", title:"Arrive in London", desc:"Plan for taxi or Uber from the airport to the Airbnb in the Knightsbridge area."},
-      {time:"Evening", title:"Check in and dinner", desc:"Airbnb booked near Relton Mews, Greater London, SW7 1ET. Keep the first evening light after travel."}
+      {time:"Travel", title:"Flight panel", desc:"Boston (BOS) → London | British Airways BA0238 | Departure: 7:25 AM | Booking: CI7vjg", style:"info"},
+      {time:"Arrival", title:"Transfer to Airbnb", desc:"Go from the airport to the Knightsbridge Airbnb by taxi or Uber."},
+      {time:"Tuesday evening", title:"Airbnb check-in", desc:"Airbnb address: Relton Mews, Greater London, SW7 1ET.", style:"highlight"}
     ],
     details: [
-      ["Flight", "British Airways BA0238"],
-      ["Booking #", "CI7vjg"],
-      ["Stay", "Airbnb in Knightsbridge"],
-      ["Transport", "Taxi / Uber to Airbnb"],
-      ["Area", "Relton Mews, Greater London, SW7 1ET"]
-    ],
-    notes: "Bring your passport, British Airways booking number (CI7vjg), phone charger, backup battery, and UK plug adapter. Good first-night priorities: unpack essentials, confirm tomorrow’s Shard reservation timing, and get adapters / charging sorted."
+      {k:"Flight", v:"British Airways BA0238"},
+      {k:"Departure", v:"7:25 AM from Boston"},
+      {k:"Booking", v:"CI7vjg"},
+      {k:"Stay", v:"Airbnb, Knightsbridge"},
+      {k:"Airbnb Address", v:"Relton Mews, Greater London, SW7 1ET", style:"highlight"},
+      {k:"Ground Transport", v:"Taxi / Uber from airport"}
+    ]
   },
   {
     date: "Wednesday, April 15",
     label: "London",
     tag: "City Day",
-    summary: "Open London day with drinks planned at GŎNG at The Shard in the late afternoon.",
+    summary: "London sightseeing day with late afternoon drinks at GŎNG at The Shard and dinner afterward.",
     timeline: [
-      {time:"Daytime", title:"London sightseeing / flexible day", desc:"Use this as the main London sightseeing day near Knightsbridge, Hyde Park, Harrods, or any planned stops."},
-      {time:"5:30–6:30 PM", title:"Drinks at GŎNG at The Shard", desc:"Scott and Cheryl booked two 4-seat reservations. Minimum spend listed as $30 per person."},
-      {time:"Evening", title:"Dinner", desc:"Dinner after drinks at or near London Bridge / Borough Market area, or back near the hotel area depending on energy level."}
+      {time:"Daytime", title:"London sightseeing", desc:"Open day for London stops near Knightsbridge, Hyde Park, Harrods, or any other planned sightseeing."},
+      {time:"5:30–6:30 PM", title:"Drinks at GŎNG at The Shard", desc:"Two 4-seat reservations."},
+      {time:"Evening", title:"Dinner", desc:"Dinner after The Shard, likely London Bridge / Borough Market area or back near the Airbnb."}
     ],
     details: [
-      ["Reservation", "GŎNG at The Shard"],
-      ["Time", "5:30–6:30 PM"],
-      ["Booking", "Two 4-seat reservations"],
-      ["Spend", "$30 minimum per person"]
-    ],
-    notes: "This is a good day to keep fairly flexible. The anchor event is the Shard reservation."
+      {k:"Reservation", v:"GŎNG at The Shard"},
+      {k:"Time", v:"5:30–6:30 PM"},
+      {k:"Booking", v:"Two 4-seat reservations"},
+      {k:"Minimum", v:"$30 per person"}
+    ]
   },
   {
     date: "Thursday, April 16",
     label: "London → Amsterdam",
-    tag: "Flight + Canal Evening",
-    summary: "Early pickup to London City Airport, flight to Amsterdam, then Anne Frank House, canal water taxi, and dinner.",
+    tag: "Flight + Amsterdam",
+    summary: "Early transfer to London City Airport, KLM flight to Amsterdam, then ibis Amsterdam Centre, Anne Frank House, canal pickup, and dinner.",
     timeline: [
-      {time:"7:00 AM", title:"Pickup to London City Airport", desc:"Travel group / MPV 8 arranged for 7:00 AM pickup to LCY."},
-      {time:"9:20 AM", title:"Fly KLM KL 982", desc:"Depart London City Airport for Amsterdam Schiphol."},
-      {time:"11:25 AM", title:"Arrive Amsterdam", desc:"After landing, take the train to Amsterdam Centraal and go to Hotel Ibis Amsterdam Centre."},
-      {time:"4:30–4:45 PM", title:"Anne Frank House entry", desc:"Timed entry window at Anne Frank House."},
-      {time:"5:45 PM", title:"Canal water taxi", desc:"Aemstelland water taxi pickup at the Anne Frank House area."},
-      {time:"6:30 PM", title:"Dinner at Café Restaurant ’t Zwaantje", desc:"Reservation at Berenstraat 12. Two reservations for 4 under Scott / Cheryl."}
+      {time:"7:00 AM", title:"Car transfer to LCY", desc:"Travel In Group airport transfer to London City Airport."},
+      {time:"9:20 AM", title:"Flight KL 982", desc:"KLM flight from London City Airport to Amsterdam Schiphol."},
+      {time:"11:25 AM", title:"Arrive Amsterdam", desc:"After landing, take the train to Amsterdam Centraal and go to ibis Amsterdam Centre."},
+      {time:"Hotel", title:"ibis Amsterdam Centre", desc:"Stationsplein 49, Amsterdam, 1012 AB, Netherlands.", style:"highlight"},
+      {time:"4:30–4:45 PM", title:"Anne Frank House", desc:"Timed entry window."},
+      {time:"5:45 PM", title:"Canal water taxi", desc:"Aemstelland water taxi pickup near Anne Frank House."},
+      {time:"6:30 PM", title:"Dinner", desc:"Café Restaurant ’t Zwaantje, Berenstraat 12. Two reservations for 4 under Scott / Cheryl."}
     ],
     details: [
-      ["Airport Transfer", "MPV 8, 7:00 AM pickup"],
-      ["Flight", "KLM KL 982"],
-      ["Hotel", "Ibis Amsterdam Centre"],
-      ["Address", "Stationsplein 49, 1012 AB Amsterdam"]
-    ],
-    notes: "This is a packed day. Keep passports, train plan, and Anne Frank House timing handy so the afternoon stays smooth."
+      {k:"Airport Transfer", v:"Travel In Group | 7:00 AM pickup to LCY"},
+      {k:"Flight", v:"KLM KL 982"},
+      {k:"Departure", v:"9:20 AM from London City Airport"},
+      {k:"Arrival", v:"11:25 AM Amsterdam Schiphol"},
+      {k:"Hotel", v:"ibis Amsterdam Centre"},
+      {k:"Hotel Address", v:"Stationsplein 49, Amsterdam, 1012 AB, Netherlands", style:"highlight"},
+      {k:"Check-in", v:"Thu, Apr 16 | starts 3:00 PM"},
+      {k:"Travelers", v:"6 adults"}
+    ]
   },
   {
     date: "Friday, April 17",
     label: "Amsterdam → Viking Mani",
     tag: "Embarkation Day",
-    summary: "Check out of the Ibis, store luggage, visit Keukenhof, then retrieve bags and head to the passenger terminal to board Viking Mani.",
+    summary: "Check out of ibis Amsterdam Centre, store luggage, do the Keukenhof tulip trip, then collect bags and board Viking Mani.",
     timeline: [
-      {time:"Morning", title:"Check out and store luggage", desc:"Check out of Hotel Ibis Amsterdam Centre and leave luggage there."},
-      {time:"Morning", title:"Walk to the ferry behind Amsterdam Centraal", desc:"Look for signs to Ferry / PONT / IJ and take the free Buiksloterweg ferry."},
-      {time:"After ferry", title:"Head to This is Holland area", desc:"Look for the 'This is Holland' building at Overhoeksplein 51."},
-      {time:"Daytime", title:"Keukenhof tulip visit", desc:"Tickets already purchased. This is the main pre-cruise activity for the day."},
-      {time:"Return", title:"Pick up luggage at Ibis", desc:"Return to Amsterdam, collect luggage, and get ready for embarkation."},
-      {time:"Later afternoon / evening", title:"Uber to Passenger Terminal Amsterdam", desc:"Go to the terminal and board Viking Mani."}
+      {time:"Morning", title:"Checkout and luggage storage", desc:"Check out of ibis Amsterdam Centre and store luggage at the hotel before leaving for Keukenhof."},
+      {time:"Morning logistics", title:"Get to THIS IS HOLLAND bus pickup", desc:"From ibis Amsterdam Centre, walk to the rear/water side of Amsterdam Centraal. Follow signs for Ferry / PONT / IJ. Take the free Buiksloterweg ferry across. After you get off, walk a few minutes to THIS IS HOLLAND, Overhoeksplein 51. This is the Keukenhof coach pickup area.", style:"info"},
+      {time:"Daytime", title:"Keukenhof tulip visit", desc:"Main pre-cruise activity for the day."},
+      {time:"Return", title:"Pick up luggage at ibis", desc:"Return to Amsterdam, retrieve luggage, and get ready for embarkation."},
+      {time:"Later afternoon / evening", title:"Go to Passenger Terminal Amsterdam", desc:"Uber to the terminal and board Viking Mani."}
     ],
     details: [
-      ["Ship", "Viking Mani"],
-      ["Luggage", "Stored at Ibis before Keukenhof"],
-      ["Transit", "Free Buiksloterweg ferry"],
-      ["Excursions / Credits", "Pre-paid gratuities begin Apr 17"]
-    ],
-    notes: "Embarkation day is easiest if you travel light for the Keukenhof portion and keep terminal details and ship documents accessible."
+      {k:"Hotel", v:"ibis Amsterdam Centre"},
+      {k:"Checkout", v:"Fri, Apr 17 | noon"},
+      {k:"Luggage", v:"Store bags at ibis before Keukenhof"},
+      {k:"THIS IS HOLLAND", v:"Overhoeksplein 51"},
+      {k:"Ferry", v:"Free Buiksloterweg ferry from behind Centraal"},
+      {k:"Ship", v:"Viking Mani"}
+    ]
   },
   {
     date: "Saturday, April 18",
     label: "Kinderdijk",
-    tag: "Booked Excursion",
-    summary: "Morning Viking shore excursion: Kinderdijk Windmills by E-bicycle.",
+    tag: "Excursion",
+    summary: "Morning Kinderdijk Windmills by E-bicycle excursion.",
     timeline: [
-      {time:"8:30 AM", title:"Kinderdijk Windmills by E-bicycle", desc:"Pre-purchased Viking excursion. Duration listed as 2.0 hours."},
-      {time:"Late morning onward", title:"Return to ship / free time", desc:"Use the rest of the day for onboard time, town wandering, or a light afternoon depending on the ship schedule."}
+      {time:"8:30 AM", title:"Kinderdijk Windmills by E-bicycle", desc:"Morning excursion. Duration listed as 2.0 hours."},
+      {time:"Late morning onward", title:"Return / free time", desc:"Open time for ship, town, or relaxing later in the day."}
     ],
     details: [
-      ["Excursion", "Kinderdijk Windmills by E-bicycle"],
-      ["Time", "8:30 AM"],
-      ["Duration", "2.0 hours"],
-      ["Final Price", "$74 per person after credits"]
-    ],
-    notes: "This is one of the paid pre-purchased excursions. Make sure to be ready a little early since shore departure times can shift."
+      {k:"Excursion", v:"Kinderdijk Windmills by E-bicycle"},
+      {k:"Time", v:"8:30 AM"},
+      {k:"Duration", v:"2.0 hours"}
+    ]
   },
   {
     date: "Sunday, April 19",
     label: "Cologne",
-    tag: "Two Booked Excursions",
-    summary: "Cologne day with a morning walking tour and an evening beer culture & dinner experience.",
+    tag: "Two Excursions",
+    summary: "Cologne day with a morning walking tour and an evening beer culture and dinner experience.",
     timeline: [
-      {time:"10:30 AM", title:"Cologne Walking Tour", desc:"Included / no final charge listed. Duration 2.0 hours."},
-      {time:"Afternoon", title:"Free time in Cologne", desc:"Open time between excursions for lunch, cathedral area, or a relaxed onboard break."},
-      {time:"6:30 PM", title:"Cologne’s Beer Culture & Dinner", desc:"Pre-purchased evening excursion. Duration 3.5 hours."}
+      {time:"10:30 AM", title:"Cologne Walking Tour", desc:"Morning excursion. Duration 2.0 hours."},
+      {time:"Afternoon", title:"Free time in Cologne", desc:"Open time between excursions."},
+      {time:"6:30 PM", title:"Cologne’s Beer Culture & Dinner", desc:"Evening excursion. Duration 3.5 hours."}
     ],
     details: [
-      ["Morning Excursion", "Cologne Walking Tour"],
-      ["Morning Time", "10:30 AM"],
-      ["Evening Excursion", "Cologne’s Beer Culture & Dinner"],
-      ["Evening Time", "6:30 PM"]
-    ],
-    notes: "This is one of the fullest cruise days since you have both a day excursion and an evening outing."
+      {k:"Morning", v:"Cologne Walking Tour"},
+      {k:"Morning Time", v:"10:30 AM"},
+      {k:"Evening", v:"Cologne’s Beer Culture & Dinner"},
+      {k:"Evening Time", v:"6:30 PM"}
+    ]
   },
   {
     date: "Monday, April 20",
     label: "Koblenz",
-    tag: "Excursion + Dinner Tip",
-    summary: "Morning Historic Koblenz excursion, plus a saved note to arrive early and request Aquavit seating for dinner.",
+    tag: "Excursion",
+    summary: "Morning Historic Koblenz excursion, then free time and Aquavit-targeted dinner timing.",
     timeline: [
-      {time:"8:30 AM", title:"Historic Koblenz", desc:"Included shore excursion. Duration listed as 2.0 hours."},
-      {time:"Afternoon", title:"Free time / ship time", desc:"Relax after the excursion, explore more independently, or enjoy the ship."},
-      {time:"5:45–6:00 PM", title:"Arrive early for dinner", desc:"Saved note: highly recommended to request Aquavit seating at dinner."}
+      {time:"8:30 AM", title:"Historic Koblenz", desc:"Morning excursion. Duration listed as 2.0 hours."},
+      {time:"Afternoon", title:"Free time / ship time", desc:"Relax, explore independently, or stay on board."},
+      {time:"5:45–6:00 PM", title:"Aquavit dinner timing", desc:"Arrive early and request Aquavit seating."}
     ],
     details: [
-      ["Excursion", "Historic Koblenz"],
-      ["Time", "8:30 AM"],
-      ["Duration", "2.0 hours"],
-      ["Dinner Note", "Request Aquavit seating"]
-    ],
-    notes: "Arrive early to dinner and ask for Aquavit seating. That was specifically marked as highly recommended."
+      {k:"Excursion", v:"Historic Koblenz"},
+      {k:"Time", v:"8:30 AM"},
+      {k:"Duration", v:"2.0 hours"},
+      {k:"Dinner", v:"Request Aquavit seating"}
+    ]
   },
   {
     date: "Tuesday, April 21",
     label: "Speyer",
-    tag: "Booked Excursion",
+    tag: "Excursion",
     summary: "Afternoon Speyer Walking Tour.",
     timeline: [
-      {time:"Morning", title:"Open morning", desc:"Enjoy a slower start, breakfast on board, and any time in port or on the ship."},
-      {time:"2:00 PM", title:"Speyer Walking Tour", desc:"Included shore excursion. Duration listed as 3.0 hours."},
-      {time:"Evening", title:"Return and unwind", desc:"Dinner and relaxed onboard evening after the afternoon tour."}
+      {time:"Morning", title:"Open morning", desc:"Slower start on board or in port."},
+      {time:"2:00 PM", title:"Speyer Walking Tour", desc:"Afternoon excursion. Duration listed as 3.0 hours."},
+      {time:"Evening", title:"Return and dinner", desc:"Dinner and relaxed onboard evening after the tour."}
     ],
     details: [
-      ["Excursion", "Speyer Walking Tour"],
-      ["Time", "2:00 PM"],
-      ["Duration", "3.0 hours"],
-      ["Charge", "Included / no final charge listed"]
-    ],
-    notes: "Good day to keep morning flexible and unhurried before the afternoon walking tour."
+      {k:"Excursion", v:"Speyer Walking Tour"},
+      {k:"Time", v:"2:00 PM"},
+      {k:"Duration", v:"3.0 hours"}
+    ]
   },
   {
     date: "Wednesday, April 22",
     label: "Strasbourg",
-    tag: "Booked Excursion",
+    tag: "Excursion",
     summary: "Morning Strasbourg Highlights tour.",
     timeline: [
-      {time:"8:30 AM", title:"Strasbourg Highlights", desc:"Included excursion. Duration listed as 4.0 hours."},
-      {time:"Afternoon", title:"Free time", desc:"Use any extra time for relaxing, photos, shopping, or enjoying the ship."}
+      {time:"8:30 AM", title:"Strasbourg Highlights", desc:"Morning excursion. Duration listed as 4.0 hours."},
+      {time:"Afternoon", title:"Free time", desc:"Open time after the excursion."}
     ],
     details: [
-      ["Excursion", "Strasbourg Highlights"],
-      ["Time", "8:30 AM"],
-      ["Duration", "4.0 hours"],
-      ["Charge", "Included / no final charge listed"]
-    ],
-    notes: "Another earlier start. Best to be ready ahead of departure."
+      {k:"Excursion", v:"Strasbourg Highlights"},
+      {k:"Time", v:"8:30 AM"},
+      {k:"Duration", v:"4.0 hours"}
+    ]
   },
   {
     date: "Thursday, April 23",
     label: "Black Forest",
-    tag: "Booked Excursion",
-    summary: "Afternoon Black Forest excursion.",
+    tag: "Excursion",
+    summary: "Afternoon Black Forest excursion, then final onboard evening before Basel.",
     timeline: [
-      {time:"Morning", title:"Cruise / free time", desc:"A more open morning before the afternoon outing."},
-      {time:"2:00 PM", title:"The Black Forest", desc:"Included excursion. Duration listed as 4.0 hours."},
-      {time:"Evening", title:"Return to ship", desc:"Final onboard evening before disembarkation in Basel the next day."}
+      {time:"Morning", title:"Cruise / free time", desc:"Open morning before the afternoon outing."},
+      {time:"2:00 PM", title:"The Black Forest", desc:"Afternoon excursion. Duration listed as 4.0 hours."},
+      {time:"Evening", title:"Return to ship", desc:"Final onboard evening before disembarkation."}
     ],
     details: [
-      ["Excursion", "The Black Forest"],
-      ["Time", "2:00 PM"],
-      ["Duration", "4.0 hours"],
-      ["Charge", "Included / no final charge listed"]
-    ],
-    notes: "This is effectively your last full cruise day, so it is a good one to pack, organize, and prepare for the Basel departure."
+      {k:"Excursion", v:"The Black Forest"},
+      {k:"Time", v:"2:00 PM"},
+      {k:"Duration", v:"4.0 hours"}
+    ]
   },
   {
     date: "Friday, April 24",
     label: "Basel → Paris",
     tag: "Train Transfer Day",
-    summary: "Disembark in Basel, take a taxi to Basel SBB, then high-speed train to Paris and transfer to the Airbnb in the 16th arrondissement.",
+    summary: "Disembark in Basel, taxi to Basel SBB, then high-speed train to Paris and transfer to the Airbnb in the 16th arrondissement.",
     timeline: [
-      {time:"Morning", title:"Disembark Viking in Basel", desc:"Leave the ship and take a taxi to Basel SBB train station."},
-      {time:"9:45 AM", title:"Recommended arrival at station", desc:"Target arrival at Basel SBB by 9:45 AM for the train."},
-      {time:"10:34 AM", title:"Train 9210 to Paris", desc:"High-speed TGV Lyria / SNCF service."},
-      {time:"1:40 PM", title:"Arrive Paris Gare de Lyon", desc:"Then transfer to the Airbnb by Uber / taxi. One note in the document also references Metro 1 to CDG-Etoile."},
+      {time:"Morning", title:"Disembark in Basel", desc:"Leave the ship and take a taxi to Basel SBB train station."},
+      {time:"9:45 AM", title:"Be at station", desc:"Target arrival at Basel SBB by 9:45 AM."},
+      {time:"10:34 AM", title:"Train 9210", desc:"High-speed TGV Lyria / SNCF service to Paris."},
+      {time:"1:40 PM", title:"Arrive Paris Gare de Lyon", desc:"Then transfer to the Airbnb by Uber / taxi."},
       {time:"Afternoon", title:"Drop luggage and lunch", desc:"Get settled and have lunch."},
-      {time:"Later afternoon", title:"Possible Musée d’Orsay", desc:"Musée d’Orsay is listed as a possibility for the day."},
-      {time:"Evening", title:"Dinner TBD", desc:"Paris dinner still open."}
+      {time:"Later afternoon", title:"Possible Musée d’Orsay", desc:"Musée d’Orsay remains a possible stop."},
+      {time:"Evening", title:"Dinner", desc:"Dinner TBD."}
     ],
     details: [
-      ["Train", "9210"],
-      ["Departure", "10:34 AM from Basel SBB"],
-      ["Arrival", "1:40 PM at Paris Gare de Lyon"],
-      ["Stay", "Paris Airbnb in 16th arrondissement"]
-    ],
-    notes: "Paris Airbnb address was still marked as unresolved in the source document."
+      {k:"Train", v:"9210"},
+      {k:"Departure", v:"10:34 AM from Basel SBB"},
+      {k:"Arrival", v:"1:40 PM at Paris Gare de Lyon"},
+      {k:"Stay", v:"Paris Airbnb in 16th arrondissement"}
+    ]
   },
   {
     date: "Saturday, April 25",
@@ -497,19 +516,18 @@ const days = [
     tag: "Sightseeing Day",
     summary: "Main Paris sightseeing day with Musée d’Orsay, Notre-Dame, and Eiffel Tower entry in the late afternoon.",
     timeline: [
-      {time:"Morning", title:"Musée d’Orsay", desc:"Listed as a main Paris activity for the day."},
-      {time:"Afternoon", title:"Notre-Dame", desc:"Also listed as a possible stop for the day."},
-      {time:"4:30 PM", title:"Arrive for Eiffel Tower", desc:"Planned arrival time before the 4:45 PM tour."},
-      {time:"4:45 PM", title:"Eiffel Tower tour", desc:"Address noted as 38 Av. de la Bourdonnais, Paris."},
-      {time:"Evening", title:"Dinner in Paris", desc:"Dinner still TBD."}
+      {time:"Morning", title:"Musée d’Orsay", desc:"Main museum visit."},
+      {time:"Afternoon", title:"Notre-Dame", desc:"Primary afternoon sightseeing stop."},
+      {time:"4:30 PM", title:"Arrive for Eiffel Tower", desc:"Planned arrival before the 4:45 PM tour."},
+      {time:"4:45 PM", title:"Eiffel Tower tour", desc:"38 Av. de la Bourdonnais, Paris."},
+      {time:"Evening", title:"Dinner", desc:"Dinner TBD."}
     ],
     details: [
-      ["Eiffel Arrival", "4:30 PM"],
-      ["Tour Time", "4:45 PM"],
-      ["Eiffel Address", "38 Av. de la Bourdonnais"],
-      ["Dinner", "TBD"]
-    ],
-    notes: "This is the most sightseeing-heavy Paris day, so keeping museum timing clean will matter."
+      {k:"Eiffel Arrival", v:"4:30 PM"},
+      {k:"Tour Time", v:"4:45 PM"},
+      {k:"Eiffel Address", v:"38 Av. de la Bourdonnais"},
+      {k:"Dinner", v:"TBD"}
+    ]
   },
   {
     date: "Sunday, April 26",
@@ -518,24 +536,40 @@ const days = [
     summary: "Check out, head to CDG, and fly home on Delta.",
     timeline: [
       {time:"Morning", title:"Check out", desc:"Leave the Airbnb and prepare for airport transfer."},
-      {time:"9:45 AM", title:"Recommended pickup time", desc:"Suggested airport transfer timing. A Viator 8-person bus is mentioned as one option."},
-      {time:"1:10 PM", title:"Depart Paris CDG on Delta DL 8716", desc:"Return flight to Boston."}
+      {time:"9:45 AM", title:"Recommended pickup", desc:"Suggested airport transfer timing. Viator 8-person bus is one option."},
+      {time:"1:10 PM", title:"Delta DL 8716", desc:"Depart Paris CDG for Boston."}
     ],
     details: [
-      ["Flight", "Delta DL 8716"],
-      ["Departure", "1:10 PM"],
-      ["Airport", "Paris CDG"],
-      ["Transfer", "Viator 8-person bus suggested"]
-    ],
-    notes: "Final travel day. Keep passports, check-out timing, and airport transfer details locked in the night before."
+      {k:"Flight", v:"Delta DL 8716"},
+      {k:"Departure", v:"1:10 PM"},
+      {k:"Airport", v:"Paris CDG"},
+      {k:"Transfer", v:"Viator 8-person bus suggested"}
+    ]
   }
 ];
 
-const tripNotes = [
-  {time:"Support", title:"Viking En Route Travel Support", desc:"Phone: +1-877-523-0576 · Text: +1-818-804-4699"},
-  {time:"Packing", title:"Must-have travel items", desc:"Converters: Type G for London and Type C for France / Amsterdam. Also corded headphones, Apple Pay setup, sleep mask, face mask, and backup battery."},
-  {time:"Cruise Credits", title:"Pre-purchased excursion totals", desc:"Each guest shows $464 retail, $250 credits applied, and $214 final price total for the listed pre-purchased items."},
-  {time:"Excursion Timing", title:"Departure times can change", desc:"Viking notes that shore excursion departure times are subject to change, so confirm on board with the Viking Daily."}
+const supportCards = [
+  {
+    title: "Viking En Route Support",
+    lines: [
+      "Phone: +1-877-523-0576",
+      "Text: +1-818-804-4699"
+    ]
+  },
+  {
+    title: "Travel In Group — LCY Transfer",
+    lines: [
+      "Service: London to London City Airport transfer",
+      "Receipt: 2550-9140",
+      "Invoice: JCUFIEWD-0001",
+      "Amount Paid: £156.00",
+      "Email: silvino@thetravelingroup.com",
+      "General Email: info@thetravelingroup.com.com",
+      "UK Phone: +44 203 9849 403",
+      "Emergency / WhatsApp: +44 7733 448902",
+      "Website: www.thetravelingroup.com"
+    ]
+  }
 ];
 
 let currentIndex = 0;
@@ -547,8 +581,7 @@ const daySummary = document.getElementById("daySummary");
 const dayTag = document.getElementById("dayTag");
 const timeline = document.getElementById("timeline");
 const detailsGrid = document.getElementById("detailsGrid");
-const notesBox = document.getElementById("notesBox");
-const globalNotes = document.getElementById("globalNotes");
+const supportGrid = document.getElementById("supportGrid");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 
@@ -579,7 +612,7 @@ function renderDay() {
   timeline.innerHTML = "";
   day.timeline.forEach(item => {
     const div = document.createElement("div");
-    div.className = "item";
+    div.className = "item" + (item.style ? ` ${item.style}` : "");
     div.innerHTML = `
       <div class="item-time">${item.time}</div>
       <div class="item-title">${item.title}</div>
@@ -589,17 +622,16 @@ function renderDay() {
   });
 
   detailsGrid.innerHTML = "";
-  day.details.forEach(([k,v]) => {
+  day.details.forEach(item => {
     const div = document.createElement("div");
-    div.className = "item";
+    div.className = "item" + (item.style ? ` ${item.style}` : "");
     div.innerHTML = `
-      <div class="item-time">${k}</div>
-      <div class="item-title">${v}</div>
+      <div class="item-time">${item.k}</div>
+      <div class="item-title">${item.v}</div>
     `;
     detailsGrid.appendChild(div);
   });
 
-  notesBox.textContent = day.notes;
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === days.length - 1;
   prevBtn.style.opacity = currentIndex === 0 ? .5 : 1;
@@ -607,24 +639,23 @@ function renderDay() {
   daySelect.value = String(currentIndex);
 }
 
-function renderGlobalNotes() {
-  globalNotes.innerHTML = "";
-  tripNotes.forEach(item => {
+function renderSupport() {
+  supportGrid.innerHTML = "";
+  supportCards.forEach(card => {
     const div = document.createElement("div");
-    div.className = "item";
+    div.className = "support-card";
     div.innerHTML = `
-      <div class="item-time">${item.time}</div>
-      <div class="item-title">${item.title}</div>
-      <div class="item-desc">${item.desc}</div>
+      <h3>${card.title}</h3>
+      ${card.lines.map(line => `<div class="line">${line}</div>`).join("")}
     `;
-    globalNotes.appendChild(div);
+    supportGrid.appendChild(div);
   });
 }
 
 function renderAll() {
   renderNav();
   renderDay();
-  renderGlobalNotes();
+  renderSupport();
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
