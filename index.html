@@ -269,8 +269,10 @@
       <div class="section-title">Key details</div>
       <div class="grid" id="detailsGrid"></div>
 
-      <div class="section-title">Notes</div>
-      <div class="note" id="notesBox"></div>
+      <div id="notesSection">
+        <div class="section-title">Notes</div>
+        <div class="note" id="notesBox"></div>
+      </div>
 
       <div class="footer-note">Version built from your itinerary document and your Viking pre-purchased excursions PDF.</div>
     </section>
@@ -296,12 +298,10 @@ const days = [
     ],
     details: [
       ["Flight", "British Airways BA0238 · Booking # CI7vjg · 7:25 AM → 6:55 PM"],
-      ["Transfer", "Heathrow Airport to Central London Private Transfers"],
-      ["Transfer Ref", "Conf. 1766611593 · Ref. 1383978357"],
-      ["Stay", "Airbnb in Knightsbridge"],
-      ["Area", "Relton Mews, Greater London, SW7 1ET"]
+      ["Transfer", "Heathrow Airport to Central London Private Transfers · Conf. 1766611593 · Ref. 1383978357"],
+      ["Stay", "Airbnb in Knightsbridge · Relton Mews, Greater London, SW7 1ET"]
     ],
-    notes: "Bring your passport, British Airways booking number (CI7vjg), phone charger, backup battery, and UK plug adapter. Keep the Heathrow transfer confirmation handy after landing: confirmation 1766611593 and booking reference 1383978357. Good first-night priorities: unpack essentials, confirm tomorrow’s Shard reservation timing, and get adapters / charging sorted."
+    notes: ""
   },
   {
     date: "Wednesday, April 15",
@@ -314,12 +314,9 @@ const days = [
       {time:"Evening", title:"Dinner", desc:"Dinner after drinks at or near London Bridge / Borough Market area, or back near the hotel area depending on energy level."}
     ],
     details: [
-      ["Reservation", "GŎNG at The Shard"],
-      ["Time", "5:30–6:30 PM"],
-      ["Booking", "Two 4-seat reservations"],
-      ["Spend", "$30 minimum per person"]
+      ["GŎNG at The Shard", "5:30–6:30 PM · Two 4-seat reservations · $30 minimum per person"]
     ],
-    notes: "This is a good day to keep fairly flexible. The anchor event is the Shard reservation."
+    notes: ""
   },
   {
     date: "Thursday, April 16",
@@ -335,12 +332,11 @@ const days = [
       {time:"6:30 PM", title:"Dinner at Café Restaurant ’t Zwaantje", desc:"Reservation at Berenstraat 12. Two reservations for 4 under Scott / Cheryl."}
     ],
     details: [
-      ["Airport Transfer", "MPV 8, 7:00 AM pickup"],
+      ["Airport Transfer", "MPV 8 · 7:00 AM pickup to London City Airport"],
       ["Flight", "KLM KL 982"],
-      ["Hotel", "Ibis Amsterdam Centre"],
-      ["Address", "Stationsplein 49, 1012 AB Amsterdam"]
+      ["Hotel", "Ibis Amsterdam Centre · Stationsplein 49, 1012 AB Amsterdam"]
     ],
-    notes: "This is a packed day. Keep passports, train plan, and Anne Frank House timing handy so the afternoon stays smooth."
+    notes: ""
   },
   {
     date: "Friday, April 17",
@@ -358,10 +354,9 @@ const days = [
     details: [
       ["Ship", "Viking Mani"],
       ["Luggage", "Stored at Ibis before Keukenhof"],
-      ["Transit", "Free Buiksloterweg ferry"],
-      ["Excursions / Credits", "Pre-paid gratuities begin Apr 17"]
+      ["Transit", "Free Buiksloterweg ferry"]
     ],
-    notes: "Embarkation day is easiest if you travel light for the Keukenhof portion and keep terminal details and ship documents accessible."
+    notes: ""
   },
   {
     date: "Saturday, April 18",
@@ -391,10 +386,8 @@ const days = [
       {time:"6:30 PM", title:"Cologne’s Beer Culture & Dinner", desc:"Pre-purchased evening excursion. Duration 3.5 hours."}
     ],
     details: [
-      ["Morning Excursion", "Cologne Walking Tour"],
-      ["Morning Time", "10:30 AM"],
-      ["Evening Excursion", "Cologne’s Beer Culture & Dinner"],
-      ["Evening Time", "6:30 PM"]
+      ["Morning", "Cologne Walking Tour · 10:30 AM"],
+      ["Evening", "Cologne’s Beer Culture & Dinner · 6:30 PM"]
     ],
     notes: "This is one of the fullest cruise days since you have both a day excursion and an evening outing."
   },
@@ -409,10 +402,8 @@ const days = [
       {time:"5:45–6:00 PM", title:"Arrive early for dinner", desc:"Saved note: highly recommended to request Aquavit seating at dinner."}
     ],
     details: [
-      ["Excursion", "Historic Koblenz"],
-      ["Time", "8:30 AM"],
-      ["Duration", "2.0 hours"],
-      ["Dinner Note", "Request Aquavit seating"]
+      ["Excursion", "Historic Koblenz · 8:30 AM · 2.0 hours"],
+      ["Dinner", "Arrive early and request Aquavit seating"]
     ],
     notes: "Arrive early to dinner and ask for Aquavit seating. That was specifically marked as highly recommended."
   },
@@ -427,10 +418,7 @@ const days = [
       {time:"Evening", title:"Return and unwind", desc:"Dinner and relaxed onboard evening after the afternoon tour."}
     ],
     details: [
-      ["Excursion", "Speyer Walking Tour"],
-      ["Time", "2:00 PM"],
-      ["Duration", "3.0 hours"],
-      ["Charge", "Included / no final charge listed"]
+      ["Excursion", "Speyer Walking Tour · 2:00 PM · 3.0 hours · Included"]
     ],
     notes: "Good day to keep morning flexible and unhurried before the afternoon walking tour."
   },
@@ -444,10 +432,7 @@ const days = [
       {time:"Afternoon", title:"Free time", desc:"Use any extra time for relaxing, photos, shopping, or enjoying the ship."}
     ],
     details: [
-      ["Excursion", "Strasbourg Highlights"],
-      ["Time", "8:30 AM"],
-      ["Duration", "4.0 hours"],
-      ["Charge", "Included / no final charge listed"]
+      ["Excursion", "Strasbourg Highlights · 8:30 AM · 4.0 hours · Included"]
     ],
     notes: "Another earlier start. Best to be ready ahead of departure."
   },
@@ -462,10 +447,7 @@ const days = [
       {time:"Evening", title:"Return to ship", desc:"Final onboard evening before disembarkation in Basel the next day."}
     ],
     details: [
-      ["Excursion", "The Black Forest"],
-      ["Time", "2:00 PM"],
-      ["Duration", "4.0 hours"],
-      ["Charge", "Included / no final charge listed"]
+      ["Excursion", "The Black Forest · 2:00 PM · 4.0 hours · Included"]
     ],
     notes: "This is effectively your last full cruise day, so it is a good one to pack, organize, and prepare for the Basel departure."
   },
@@ -484,9 +466,7 @@ const days = [
       {time:"Evening", title:"Dinner TBD", desc:"Paris dinner still open."}
     ],
     details: [
-      ["Train", "9210"],
-      ["Departure", "10:34 AM from Basel SBB"],
-      ["Arrival", "1:40 PM at Paris Gare de Lyon"],
+      ["Train", "9210 · 10:34 AM Basel SBB → 1:40 PM Paris Gare de Lyon"],
       ["Stay", "Paris Airbnb in 16th arrondissement"]
     ],
     notes: "Paris Airbnb address was still marked as unresolved in the source document."
@@ -504,9 +484,7 @@ const days = [
       {time:"Evening", title:"Dinner in Paris", desc:"Dinner still TBD."}
     ],
     details: [
-      ["Eiffel Arrival", "4:30 PM"],
-      ["Tour Time", "4:45 PM"],
-      ["Eiffel Address", "38 Av. de la Bourdonnais"],
+      ["Eiffel Tower", "Arrive 4:30 PM · Tour 4:45 PM · 38 Av. de la Bourdonnais"],
       ["Dinner", "TBD"]
     ],
     notes: "This is the most sightseeing-heavy Paris day, so keeping museum timing clean will matter."
@@ -522,9 +500,7 @@ const days = [
       {time:"1:10 PM", title:"Depart Paris CDG on Delta DL 8716", desc:"Return flight to Boston."}
     ],
     details: [
-      ["Flight", "Delta DL 8716"],
-      ["Departure", "1:10 PM"],
-      ["Airport", "Paris CDG"],
+      ["Flight", "Delta DL 8716 · 1:10 PM from Paris CDG"],
       ["Transfer", "Viator 8-person bus suggested"]
     ],
     notes: "Final travel day. Keep passports, check-out timing, and airport transfer details locked in the night before."
@@ -548,6 +524,7 @@ const dayTag = document.getElementById("dayTag");
 const timeline = document.getElementById("timeline");
 const detailsGrid = document.getElementById("detailsGrid");
 const notesBox = document.getElementById("notesBox");
+const notesSection = document.getElementById("notesSection");
 const globalNotes = document.getElementById("globalNotes");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -599,7 +576,13 @@ function renderDay() {
     detailsGrid.appendChild(div);
   });
 
-  notesBox.textContent = day.notes;
+  if (day.notes && day.notes.trim()) {
+    notesBox.textContent = day.notes;
+    notesSection.style.display = "block";
+  } else {
+    notesBox.textContent = "";
+    notesSection.style.display = "none";
+  }
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === days.length - 1;
   prevBtn.style.opacity = currentIndex === 0 ? .5 : 1;
