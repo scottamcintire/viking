@@ -353,23 +353,22 @@ const days = [
     tag: "Flight + Amsterdam",
     summary: "Early transfer to London City Airport, KLM flight to Amsterdam, then ibis Amsterdam Centre, Anne Frank House, canal pickup, and dinner.",
     timeline: [
-      {time:"7:00 AM", title:"Car transfer to LCY", desc:"Travel In Group airport transfer to London City Airport."},
+      {time:"7:00 AM", title:"Car transfer to LCY", desc:"Transfer to London City Airport."},
       {time:"9:20 AM", title:"Flight KL 982", desc:"KLM flight from London City Airport to Amsterdam Schiphol."},
       {time:"11:25 AM", title:"Arrive Amsterdam", desc:"After landing, take the train to Amsterdam Centraal and go to ibis Amsterdam Centre."},
       {time:"Hotel", title:"ibis Amsterdam Centre", desc:"Stationsplein 49, Amsterdam, 1012 AB, Netherlands.", style:"highlight"},
-      {time:"4:30–4:45 PM", title:"Anne Frank House", desc:"Timed entry window."},
-      {time:"5:45 PM", title:"Canal water taxi", desc:"Aemstelland water taxi pickup near Anne Frank House."},
-      {time:"6:30 PM", title:"Dinner", desc:"Café Restaurant ’t Zwaantje, Berenstraat 12. Two reservations for 4 under Scott / Cheryl."}
+      {time:"Hotel", title:"ibis Amsterdam Centre", desc:"Stationsplein 49, Amsterdam, 1012 AB, Netherlands. Check-in starts 3:00 PM.", style:"highlight"},
+      {time:"4:30–4:45 PM", title:"Anne Frank House", desc:"Westermarkt 20, 1016 GV Amsterdam. From ibis Amsterdam Centre, walk or take a short taxi/tram ride toward Westermarkt.", style:"info"},
+      {time:"5:45 PM", title:"Canal cruise pickup", desc:"Pick up: Anne Frank 17:45."},
+      {time:"6:30 PM", title:"Canal cruise drop-off + dinner", desc:"Drop off: Hotel The Dylan 18:30, about a 2-minute walk from Café Restaurant ’t Zwaantje, Berenstraat 12."}
     ],
     details: [
-      {k:"Airport Transfer", v:"Travel In Group | 7:00 AM pickup to LCY"},
-      {k:"Flight", v:"KLM KL 982"},
-      {k:"Departure", v:"9:20 AM from London City Airport"},
-      {k:"Arrival", v:"11:25 AM Amsterdam Schiphol"},
-      {k:"Hotel", v:"ibis Amsterdam Centre"},
-      {k:"Hotel Address", v:"Stationsplein 49, Amsterdam, 1012 AB, Netherlands", style:"highlight"},
-      {k:"Check-in", v:"Thu, Apr 16 | starts 3:00 PM"},
-      {k:"Travelers", v:"6 adults"}
+      {k:"Flight", v:"KLM KL 982 | 9:20 AM from London City Airport | 11:25 AM arrival Amsterdam Schiphol"},
+      {k:"Hotel Information", v:"ibis Amsterdam Centre | Stationsplein 49, Amsterdam, 1012 AB, Netherlands | Check-in starts 3:00 PM", style:"highlight"},
+      {k:"Anne Frank House", v:"Westermarkt 20, 1016 GV Amsterdam | Timed entry 4:30–4:45 PM"},
+      {k:"From ibis to Anne Frank House", v:"Walk or take a short taxi/tram ride toward Westermarkt"},
+      {k:"Canal Cruise", v:"Pick up Anne Frank 17:45 | Drop off Hotel The Dylan 18:30"},
+      {k:"Dinner", v:"Café Restaurant ’t Zwaantje, Berenstraat 12"}
     ]
   },
   {
@@ -385,12 +384,11 @@ const days = [
       {time:"Later afternoon / evening", title:"Go to Passenger Terminal Amsterdam", desc:"Uber to the terminal and board Viking Mani."}
     ],
     details: [
-      {k:"Hotel", v:"ibis Amsterdam Centre"},
-      {k:"Checkout", v:"Fri, Apr 17 | noon"},
-      {k:"Luggage", v:"Store bags at ibis before Keukenhof"},
+      {k:"Morning Plan", v:"Check out of ibis, store luggage, then head to THIS IS HOLLAND for the Keukenhof coach"},
       {k:"THIS IS HOLLAND", v:"Overhoeksplein 51"},
-      {k:"Ferry", v:"Free Buiksloterweg ferry from behind Centraal"},
-      {k:"Ship", v:"Viking Mani"}
+      {k:"Route", v:"Walk to rear/water side of Amsterdam Centraal, follow Ferry / PONT / IJ signs, take free Buiksloterweg ferry"},
+      {k:"After Keukenhof", v:"Return to ibis, pick up luggage"},
+      {k:"Embarkation", v:"Go to Passenger Terminal Amsterdam and board Viking Mani"}
     ]
   },
   {
@@ -556,19 +554,6 @@ const supportCards = [
       "Text: +1-818-804-4699"
     ]
   },
-  {
-    title: "Travel In Group — LCY Transfer",
-    lines: [
-      "Service: London to London City Airport transfer",
-      "Receipt: 2550-9140",
-      "Invoice: JCUFIEWD-0001",
-      "Amount Paid: £156.00",
-      "Email: silvino@thetravelingroup.com",
-      "General Email: info@thetravelingroup.com.com",
-      "UK Phone: +44 203 9849 403",
-      "Emergency / WhatsApp: +44 7733 448902",
-      "Website: www.thetravelingroup.com"
-    ]
   }
 ];
 
