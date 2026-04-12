@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>McIntire Europe Vacation Itinerary</title>
+<title>Viking Europe Itinerary</title>
 <style>
   :root{
     --bg:#f7f7f5;
@@ -200,6 +200,16 @@
     line-height:1.5;
     font-size:15px;
   }
+  .item-desc p{
+    margin:0 0 8px 0;
+  }
+  .item-desc ul{
+    margin:0;
+    padding-left:18px;
+  }
+  .item-desc li{
+    margin:0 0 4px 0;
+  }
   .grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -235,7 +245,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="brand">Europe Trip</div>
-    <div class="sub">Scott & Cheryl McIntire<br>Day-by-day vacation itinerary</div>
+    <div class="sub">Day-by-day vacation itinerary</div>
     <div class="day-list" id="dayList"></div>
   </aside>
 
@@ -245,8 +255,8 @@
     </div>
 
     <section class="hero">
-      <h1>McIntire Europe Vacation Itinerary</h1>
-      <p>Use the day buttons or Previous / Next to move through the trip. Each day has the main plan, logistics, and any shore excursions already booked.</p>
+      <h1>McIntire, McGowan, Morrison/King, Enright European Vacation Itinerary</h1>
+  
     </section>
 
     <div class="nav-row">
@@ -293,8 +303,8 @@ const days = [
     summary: "British Airways flight from Boston to London, private transfer from Heathrow into Central London, then get to the Knightsbridge Airbnb and settle in for the first night.",
     timeline: [
       {time:"7:25 AM", title:"Depart Boston on British Airways BA0238", desc:"Booking # CI7vjg. Depart Boston at 7:25 AM and arrive in London Heathrow at 6:55 PM."},
-      {time:"Arrival", title:"Transportation from Heathrow", desc:"Your booking confirmation: We’ve received your payment for USD $286.00 and your booking has been confirmed. Heathrow Airport to Central London Private Transfers. Confirmation number: 1766611593. Booking reference number: 1383978357. Tuesday, April 14, 2026. 8 Adults. Pickup location: London Heathrow Airport T2 and T3, Longford, Hounslow TW6 1SD, UK."},
-      {time:"Evening", title:"Check in and dinner", desc:"Airbnb booked near Relton Mews, Greater London, SW7 1ET. Keep the first evening light after travel."}
+      {time:"Arrival", title:"Transportation from Heathrow", desc:"Heathrow Airport to Central London transfers. Confirmation number: 1766611593. Booking reference number: 1383978357. Tuesday, April 14, 2026. 8 Adults. Pickup location: London Heathrow Airport T2 and T3, Longford, Hounslow TW6 1SD, UK. Viator booking"},
+      {time:"Evening", title:"Check in and dinner", desc:"Airbnb booked near Relton Mews, Greater London, SW7 1ET."}
     ],
     details: [
       ["Flight", "British Airways BA0238 · Booking # CI7vjg · 7:25 AM → 6:55 PM"],
@@ -307,14 +317,21 @@ const days = [
     date: "Wednesday, April 15",
     label: "London",
     tag: "City Day",
-    summary: "Open London day with drinks planned at GŎNG at The Shard in the late afternoon.",
+    summary: "Updated London day tour from Relton Mews through Westminster, Covent Garden, the South Bank, Tower Bridge, and drinks at The Shard.",
     timeline: [
-      {time:"Daytime", title:"London sightseeing / flexible day", desc:"Use this as the main London sightseeing day near Knightsbridge, Hyde Park, Harrods, or any planned stops."},
-      {time:"5:30–6:30 PM", title:"Drinks at GŎNG at The Shard", desc:"Scott and Cheryl booked two 4-seat reservations. Minimum spend listed as $30 per person."},
-      {time:"Evening", title:"Dinner", desc:"Dinner after drinks at or near London Bridge / Borough Market area, or back near the hotel area depending on energy level."}
+      {time:"8:30 AM", title:"Start at Relton Mews", desc:"<ul><li>Coffee + quick breakfast nearby</li><li>Tube to Westminster</li></ul>"},
+      {time:"9:00 AM", title:"Westminster Highlights", desc:"<ul><li>Big Ben</li><li>Palace of Westminster</li><li>Westminster Abbey</li></ul><p>Walk across Westminster Bridge for views.</p>"},
+      {time:"10:15 AM", title:"Royal Walk", desc:"<ul><li>St James's Park</li><li>Buckingham Palace</li></ul>"},
+      {time:"11:30 AM", title:"Trafalgar → Covent Garden", desc:"<ul><li>Trafalgar Square</li><li>Covent Garden</li></ul>"},
+      {time:"12:30 PM", title:"Lunch (Covent Garden)", desc:"<ul><li>Dishoom Covent Garden</li><li>Flat Iron Covent Garden</li></ul>"},
+      {time:"2:00 PM", title:"Leisurely Walk: Covent Garden → South Bank", desc:"<p>Instead of the museum, enjoy a scenic walk:</p><ul><li>Walk via the Strand toward the river</li><li>Cross the Millennium Bridge</li><li>Pass St Paul's Cathedral</li><li>Tate Modern (quick peek optional)</li></ul><p>Continue along the Thames toward Tower Bridge.</p>"},
+      {time:"3:30 PM", title:"Tower Area", desc:"<ul><li>Tower of London</li><li>Tower Bridge</li></ul><p>Take your time here—this is one of the most atmospheric parts of London.</p>"},
+      {time:"5:30 PM", title:"Drinks (1.5 hrs)", desc:"<ul><li>GŎNG at The Shard</li><li>The Shard</li></ul>"},
+      {time:"8:30 PM", title:"Optional Evening Walk", desc:"<p>Stroll west along the river past:</p><ul><li>Shakespeare's Globe</li><li>London Eye</li></ul>"},
+      {time:"9:30 PM", title:"Return to Relton Mews", desc:""}
     ],
     details: [
-      ["GŎNG at The Shard", "5:30–6:30 PM · Two 4-seat reservations · $30 minimum per person"]
+      ["GŎNG at The Shard", "5:30 PM · 1.5 hours · Two 4-seat reservations · $30 minimum per person"]
     ],
     notes: ""
   },
@@ -324,11 +341,11 @@ const days = [
     tag: "Flight + Canal Evening",
     summary: "Early pickup to London City Airport, flight to Amsterdam, then Anne Frank House, canal water taxi, and dinner.",
     timeline: [
-      {time:"7:00 AM", title:"Pickup to London City Airport", desc:"Travel group / MPV 8 arranged for 7:00 AM pickup to LCY."},
-      {time:"9:20 AM", title:"Fly KLM KL 982", desc:"Depart London City Airport for Amsterdam Schiphol."},
-      {time:"11:25 AM", title:"Arrive Amsterdam", desc:"After landing, take the train to Amsterdam Centraal and go to Hotel Ibis Amsterdam Centre."},
-      {time:"4:30–4:45 PM", title:"Anne Frank House entry", desc:"Timed entry window at Anne Frank House."},
-      {time:"5:45 PM", title:"Canal water taxi", desc:"Aemstelland water taxi pickup at the Anne Frank House area."},
+      {time:"7:00 AM", title:"Pickup to London City Airport", desc:"The Travel in Group / MPV 8 arranged for 7:00 AM pickup to LCY. UK +44 203 9849 403"},
+      {time:"9:20 AM", title:"KLM Flight- KL 982", desc:"Departure 9:20AM,  London City Airport for Amsterdam Schiphol."},
+      {time:"11:25 AM", title:"Arrive Amsterdam", desc:"11:25AM arrival. Follow signs for trains. Take any direct train to <b>Amsterdam Central</b>.<br>Pay with contactless debit/credit card. At  Centraal station, exit and walk to <b>Ibis Centre hotel</b> Stationsplein 40."},
+      {time:"4:30–4:45 PM", title:"Anne Frank House entry", desc:"Walk from IBIS- 20 min. Anne Frank House, Westermarkt 20.Timed entry window 4:30-4:45"},
+      {time:"5:45 PM", title:"Aemstelland water taxi- Rose", desc:"Pick up: Anne Frank House. Canal taxi and tour. Drop-off, Hotel The Dylan- 2 minute walk to Cafe Restaurant 't Zwaantje. "},
       {time:"6:30 PM", title:"Dinner at Café Restaurant ’t Zwaantje", desc:"Reservation at Berenstraat 12. Two reservations for 4 under Scott / Cheryl."}
     ],
     details: [
