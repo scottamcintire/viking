@@ -1,11 +1,4 @@
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="noindex, nofollow">
-<title>Viking Europe Itinerary</title>
-<style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="robots" content="noindex,nofollow"><title>Viking Star • Mediterranean 2028</title><style>
   :root{
     --bg:#f7f7f5;
     --card:#ffffff;
@@ -240,418 +233,54 @@
     .hero h1{font-size:24px}
     .day-title h2{font-size:24px}
   }
-</style>
-</head>
-<body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="brand">Europe Trip</div>
-    <div class="sub">Day-by-day vacation itinerary</div>
-    <div class="day-list" id="dayList"></div>
-  </aside>
 
-  <main class="main">
-    <div class="mobile-jump">
-      <select id="daySelect"></select>
-    </div>
-
-    <section class="hero">
-      <h1>Europe 2026</h1>
-  
-    </section>
-
-    <div class="nav-row">
-      <button class="secondary" id="prevBtn">← Previous Day</button>
-      <button id="nextBtn">Next Day →</button>
-    </div>
-
-    <section class="card">
-      <div class="day-title">
-        <div>
-          <h2 id="dayHeading"></h2>
-          <div class="summary" id="daySummary"></div>
-        </div>
-        <div class="tag" id="dayTag"></div>
-      </div>
-
-      <div class="section-title">Plan for the day</div>
-      <div class="timeline" id="timeline"></div>
-
-      <div class="section-title">Key details</div>
-      <div class="grid" id="detailsGrid"></div>
-
-      <div id="notesSection">
-        <div class="section-title">Notes</div>
-        <div class="note" id="notesBox"></div>
-      </div>
-
-      <div class="footer-note">Version built from your itinerary document and your Viking pre-purchased excursions PDF.</div>
-    </section>
-
-    <section class="card">
-      <div class="section-title">Trip-wide reminders</div>
-      <div class="timeline" id="globalNotes"></div>
-    </section>
-  </main>
-</div>
-
+  .overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px}
+  .metric b{display:block;font-size:21px;color:var(--accent2);margin:5px 0}
+  .metric small{color:var(--muted)}
+  .links a{display:inline-block;margin:6px 9px 6px 0;color:var(--accent2);font-weight:650}
+  .note{white-space:pre-line}
+  .footer-note a{color:var(--accent2)}
+  @media(max-width:640px){.overview{grid-template-columns:1fr}}
+</style></head><body>
+<div class="app"><aside class="sidebar"><div class="brand">Mediterranean 2028</div><div class="sub">Viking Star · Barcelona → Rome<br>March 23–30, 2028</div><div class="day-list" id="dayList"></div></aside>
+<main class="main"><div class="mobile-jump"><select id="daySelect" aria-label="Choose a day"></select></div>
+<section class="hero"><h1>Viking Star · Mediterranean 2028</h1><p>Iconic Western Mediterranean | March 23–30, 2028 | Barcelona → Rome (Civitavecchia)<br>2 guests · Penthouse Veranda PV1 · Stateroom 5092 · Deck 5</p></section>
+<div class="overview"><div class="metric"><small>Departure countdown</small><b id="countdown">—</b><small>Until March 23, 2028</small></div><div class="metric"><small>Shore excursions open</small><b>Oct 28, 2027</b><small>147 days before sailing</small></div><div class="metric"><small>Dining & spa open</small><b>Jan 13, 2028</b><small>70 days before sailing</small></div></div>
+<div class="nav-row"><button class="secondary" id="prevBtn">← Previous Day</button><button id="nextBtn">Next Day →</button></div>
+<section class="card"><div class="day-title"><div><h2 id="dayHeading"></h2><div class="summary" id="daySummary"></div></div><div class="tag" id="dayTag"></div></div>
+<div class="section-title">Plan for the day</div><div class="timeline" id="timeline"></div>
+<div class="section-title">Key details</div><div class="grid" id="detailsGrid"></div><div id="notesSection"><div class="section-title">Notes</div><div class="note" id="notesBox"></div></div>
+<div class="footer-note">Sightseeing is suggested, not reserved. Confirm all docking times, excursion selections and transfers through Viking before travel.</div></section>
+<section class="card"><div class="section-title">Cruise details & reminders</div><div class="timeline" id="globalNotes"></div></section>
+<section class="card"><div class="section-title">Useful official links</div><div class="links"><a href="https://www.vikingcruises.com/oceans/cruise-destinations/western-mediterranean/iconic-western-mediterranean/index.html?year=2028&amp;startLocation=barcelona&amp;endLocation=rome" target="_blank" rel="noopener">Viking itinerary ↗</a><a href="https://www.vikingcruises.com/oceans/ships/viking-star.html" target="_blank" rel="noopener">Viking Star ↗</a><a href="https://www.myvikingjourney.com/" target="_blank" rel="noopener">My Viking Journey ↗</a></div></section>
+</main></div>
 <script>
 const days = [
-  {
-    date: "Tuesday, April 14",
-    label: "Boston → London",
-    tag: "Travel Day",
-    summary: "British Airways flight from Boston to London, private transfer from Heathrow into Central London.",
-    timeline: [
-      {time:"7:25 AM", title:"Depart Boston on British Airways BA0238", desc:"Booking # CI7vjg. Depart Boston at 7:25 AM and arrive in London Heathrow at 6:55 PM."},
-      {time:"Arrival", title:"Transportation from Heathrow", desc:"Heathrow Airport to Central London transfers. Confirmation number: 1766611593. Booking reference number: 1383978357. Tuesday, April 14, 2026. 8 Adults. Pickup location: London Heathrow Airport T2 and T3, Longford, Hounslow TW6 1SD, UK. Viator booking"},
-      {time:"Evening", title:"Check in and dinner", desc:"Airbnb booked near Relton Mews, Greater London, SW7 1ET."}
-    ],
-    details: [
-      ["Flight", "British Airways BA0238 · Booking # CI7vjg · 7:25 AM → 6:55 PM"],
-      ["Transfer", "Heathrow Airport to Central London Private Transfers · Conf. 1766611593 · Ref. 1383978357"],
-      ["Stay", "Airbnb in Knightsbridge · Relton Mews, Greater London, SW7 1ET"]
-    ],
-    notes: ""
-  },
-  {
-    date: "Wednesday, April 15",
-    label: "London",
-    tag: "City Day",
-    summary: "Updated London day tour from Relton Mews through Westminster, Covent Garden, the South Bank, Tower Bridge, and drinks at The Shard.",
-    timeline: [
-      {time:"8:30 AM", title:"Proposed Plan for the Day", desc:"<ul><li>Coffee + quick breakfast nearby</li><li>Tube to Westminster</li></ul>"},
-      {time:"9:00 AM", title:"Westminster Highlights", desc:"<ul><li>Big Ben</li><li>Palace of Westminster</li><li>Westminster Abbey</li></ul><p>Walk across Westminster Bridge for views.</p>"},
-      {time:"10:15 AM", title:"Royal Walk", desc:"<ul><li>St James's Park</li><li>Buckingham Palace</li></ul>"},
-      {time:"11:30 AM", title:"Trafalgar → Covent Garden", desc:"<ul><li>Trafalgar Square</li><li>Covent Garden</li></ul>"},
-      {time:"12:30 PM", title:"Lunch (Covent Garden)", desc:"<ul><li>Dishoom Covent Garden</li><li>Flat Iron Covent Garden</li></ul>"},
-      {time:"2:00 PM", title:"Leisurely Walk: Covent Garden → South Bank", desc:"<p>Instead of the museum, enjoy a scenic walk:</p><ul><li>Walk via the Strand toward the river</li><li>Cross the Millennium Bridge</li><li>Pass St Paul's Cathedral</li><li>Tate Modern (quick peek optional)</li></ul><p>Continue along the Thames toward Tower Bridge.</p>"},
-      {time:"3:30 PM", title:"Tower Area", desc:"<ul><li>Tower of London</li><li>Tower Bridge</li></ul><p>Take your time here—this is one of the most atmospheric parts of London.</p>"},
-      {time:"5:30 PM", title:"Drinks (1.5 hrs)", desc:"<ul><li>GŎNG at The Shard</li><li>The Shard</li></ul>"},
-      {time:"8:30 PM", title:"Optional Evening Walk", desc:"<p>Stroll west along the river past:</p><ul><li>Shakespeare's Globe</li><li>London Eye</li></ul>"},
-      {time:"9:30 PM", title:"Return to Relton Mews", desc:""}
-    ],
-    details: [
-      ["GŎNG at The Shard", "5:30 PM · 1.5 hours · Two 4-seat reservations · $30 minimum per person"]
-    ],
-    notes: ""
-  },
-  {
-    date: "Thursday, April 16",
-    label: "London → Amsterdam",
-    tag: "Flight, Anne Frank House, Canal Evening",
-    summary: "Early pickup to London City Airport, flight to Amsterdam, then Anne Frank House, canal water taxi, and dinner.",
-    timeline: [
-      {time:"7:00 AM", title:"Pickup to London City Airport", desc:"The Travel in Group / MPV 8 arranged for 7:00 AM pickup to LCY. UK +44 203 9849 403"},
-      {time:"9:20 AM", title:"KLM Flight- KL 982", desc:"Departure 9:20AM,  London City Airport for Amsterdam Schiphol."},
-      {time:"11:25 AM", title:"Arrive Amsterdam", desc:"11:25AM arrival. Follow signs for trains. Take any direct train to <b>Amsterdam Central</b>.<br>Pay with contactless debit/credit card. At  Centraal station, exit and walk to <b>Ibis Centre hotel</b> Stationsplein 40."},
-      {time:"4:30–4:45 PM", title:"Anne Frank House entry", desc:"Walk from IBIS- 20 min. Anne Frank House, Westermarkt 20.Timed entry window 4:30-4:45"},
-      {time:"5:45 PM", title:"Aemstelland water taxi- Rose", desc:"Pick up: Anne Frank House. Canal taxi and tour. Drop-off, Hotel The Dylan- 2 minute walk to Cafe Restaurant 't Zwaantje. "},
-      {time:"6:30 PM", title:"Dinner at Café Restaurant ’t Zwaantje", desc:"Reservation at Berenstraat 12. Two reservations for 4 under Scott / Cheryl."}
-    ],
-    details: [
-      ["Airport Transfer", "MPV 8 · 7:00 AM pickup to London City Airport"],
-      ["Flight", "KLM KL 982"],
-      ["Hotel", "Ibis Amsterdam Centre · Stationsplein 49, 1012 AB Amsterdam"]
-    ],
-    notes: ""
-  },
-  {
-    date: "Friday, April 17",
-    label: "Amsterdam → Viking Mani",
-    tag: "Tulips, Embarkation Day",
-    summary: "Check out of the Ibis, store luggage, visit Keukenhof (tiptoe through the tulips), then retrieve bags and head to the passenger terminal to board Viking Mani.",
-    timeline: [
-      {time:"Morning", title:"Check out and store luggage", desc:"Check out of Hotel Ibis Amsterdam Centre and leave luggage there."},
-      {time:"Morning", title:"Walk to the ferry behind Amsterdam Centraal", desc:"Look for signs to Ferry / PONT / IJ and take the free Buiksloterweg ferry."},
-      {time:"After ferry", title:"Head to This is Holland area", desc:"Look for the 'This is Holland' building at Overhoeksplein 51."},
-      {time:"Daytime", title:"Keukenhof tulip visit", desc:"Tickets already purchased. This is the main pre-cruise activity for the day."},
-      {time:"Return", title:"Pick up luggage at Ibis", desc:"Return to Amsterdam, collect luggage, and get ready for embarkation."},
-      {time:"Later afternoon / evening", title:"Uber to Passenger Terminal Amsterdam", desc:"Go to the terminal and board Viking Mani."}
-    ],
-    details: [
-      ["Ship / Viking Mani", "Should you be unable to locate the ship, call the ship directly at the phone number listed below.<br><br>Your Cruise Dock Location<br>VIKING MANI<br>Passenger Terminal Amsterdam (PTA)<br>Veemkade PTA<br>Amsterdam, The Netherlands<br>De Ruijterkade<br>De Ruijterkade West / Oost<br>Amsterdam, The Netherlands<br>Westerdoksdijk<br>Westerdoksdijk 525<br>Amsterdam, The Netherlands<br><br>Ship Name: VIKING MANI<br>Ship Phone:<br>0049 152 225 38 143<br>Ship Email:<br>viking.mani@viking.com"],
-      ["Luggage", "Stored at Ibis before Keukenhof"],
-      ["Transit", "Free Buiksloterweg ferry"]
-    ],
-    notes: ""
-  },
-  {
-    date: "Saturday, April 18",
-    label: "Kinderdijk",
-    tag: "Booked Excursion",
-    summary: "Morning Viking shore excursion: Kinderdijk Windmills by E-bicycle.",
-    timeline: [
-      {time:"8:30 AM", title:"Kinderdijk Windmills by E-bicycle", desc:"Pre-purchased Viking excursion. Duration listed as 2.0 hours."},
-      {time:"Late morning onward", title:"Return to ship / free time", desc:"Use the rest of the day for onboard time, town wandering, or a light afternoon depending on the ship schedule."}
-    ],
-    details: [
-      ["Excursion", "Kinderdijk Windmills by E-bicycle"],
-      ["Time", "8:30 AM"],
-      ["Duration", "2.0 hours"],
-      ["Final Price", "$74 per person after credits"]
-    ],
-    notes: "This is one of the paid pre-purchased excursions. Make sure to be ready a little early since shore departure times can shift."
-  },
-  {
-    date: "Sunday, April 19",
-    label: "Cologne",
-    tag: "Two Booked Excursions",
-    summary: "Cologne day with a morning walking tour and an evening beer culture & dinner experience.",
-    timeline: [
-      {time:"10:30 AM", title:"Cologne Walking Tour", desc:"Included / no final charge listed. Duration 2.0 hours."},
-      {time:"Afternoon", title:"Free time in Cologne", desc:"Open time between excursions for lunch, cathedral area, or a relaxed onboard break."},
-      {time:"6:30 PM", title:"Cologne’s Beer Culture & Dinner", desc:"Pre-purchased evening excursion. Duration 3.5 hours."}
-    ],
-    details: [
-      ["Morning", "Cologne Walking Tour · 10:30 AM"],
-      ["Evening", "Cologne’s Beer Culture & Dinner · 6:30 PM"]
-    ],
-    notes: "This is one of the fullest cruise days since you have both a day excursion and an evening outing."
-  },
-  {
-    date: "Monday, April 20",
-    label: "Koblenz",
-    tag: "Excursion + Best Aquavit Night",
-    summary: "Morning Historic Koblenz excursion, plus a saved note to arrive early and request Aquavit seating for dinner.",
-    timeline: [
-      {time:"8:30 AM", title:"Historic Koblenz", desc:"Included shore excursion. Duration listed as 2.0 hours."},
-      {time:"Afternoon", title:"Free time / ship time", desc:"Relax after the excursion, explore more independently, or enjoy the ship."},
-      {time:"5:45–6:00 PM", title:"Arrive early for dinner", desc:"Saved note: highly recommended to request Aquavit seating at dinner."}
-    ],
-    details: [
-      ["Excursion", "Historic Koblenz · 8:30 AM · 2.0 hours"],
-      ["Dinner", "Arrive early and request Aquavit seating"]
-    ],
-    notes: "Arrive early to dinner and ask for Aquavit seating. That was specifically marked as highly recommended."
-  },
-  {
-    date: "Tuesday, April 21",
-    label: "Speyer",
-    tag: "Booked Excursion",
-    summary: "Afternoon Speyer Walking Tour.",
-    timeline: [
-      {time:"Morning", title:"Open morning", desc:"Enjoy a slower start, breakfast on board, and any time in port or on the ship."},
-      {time:"2:00 PM", title:"Speyer Walking Tour", desc:"Included shore excursion. Duration listed as 3.0 hours."},
-      {time:"Evening", title:"Return and unwind", desc:"Dinner and relaxed onboard evening after the afternoon tour."}
-    ],
-    details: [
-      ["Excursion", "Speyer Walking Tour · 2:00 PM · 3.0 hours · Included"]
-    ],
-    notes: "Good day to keep morning flexible and unhurried before the afternoon walking tour."
-  },
-  {
-    date: "Wednesday, April 22",
-    label: "Strasbourg",
-    tag: "Booked Excursion",
-    summary: "Morning Strasbourg Highlights tour.",
-    timeline: [
-      {time:"8:30 AM", title:"Strasbourg Highlights", desc:"Included excursion. Duration listed as 4.0 hours."},
-      {time:"Afternoon", title:"Free time", desc:"Use any extra time for relaxing, photos, shopping, or enjoying the ship."}
-    ],
-    details: [
-      ["Excursion", "Strasbourg Highlights · 8:30 AM · 4.0 hours · Included"]
-    ],
-    notes: "Another earlier start. Best to be ready ahead of departure."
-  },
-  {
-    date: "Thursday, April 23",
-    label: "Black Forest",
-    tag: "Booked Excursion",
-    summary: "Afternoon Black Forest excursion.",
-    timeline: [
-      {time:"Morning", title:"Cruise / free time", desc:"A more open morning before the afternoon outing."},
-      {time:"2:00 PM", title:"The Black Forest", desc:"Included excursion. Duration listed as 4.0 hours."},
-      {time:"Evening", title:"Return to ship", desc:"Final onboard evening before disembarkation in Basel the next day."}
-    ],
-    details: [
-      ["Excursion", "The Black Forest · 2:00 PM · 4.0 hours · Included"]
-    ],
-    notes: "This is effectively your last full cruise day, so it is a good one to pack, organize, and prepare for the Basel departure."
-  },
-  {
-    date: "Friday, April 24",
-    label: "Basel → Paris",
-    tag: "Train Transfer Day",
-    summary: "Disembark in Basel, take a taxi to Basel SBB, then high-speed train to Paris and transfer to the Airbnb in the 16th arrondissement.",
-    timeline: [
-      {time:"Morning", title:"Disembark Viking in Basel", desc:"Leave the ship and take a taxi to Basel SBB train station."},
-      {time:"9:45 AM", title:"TGV Lyric High Speed Train to Paris", desc:"Target arrival at Basel SBB by 9:45 AM for the train."},
-      {time:"10:34 AM", title:"Head to Basel SBB station/ 9210 to Paris", desc:"High-speed TGV Lyria / SNCF service."},
-      {time:"1:40 PM", title:"Arrive Paris Gare de Lyon", desc:"Then transfer to the Airbnb by Uber / taxi. One note in the document also references Metro 1 to CDG-Etoile."},
-      {time:"Afternoon", title:"Drop luggage and lunch", desc:"Get settled and have lunch."},
-      {time:"Later afternoon", title:"Possible Musée d’Orsay", desc:"Musée d’Orsay is listed as a possibility for the day."},
-      {time:"Evening", title:"Dinner TBD", desc:"Paris dinner still open."}
-    ],
-    details: [
-      ["Train", "9210 · 10:34 AM Basel SBB → 1:40 PM Paris Gare de Lyon"],
-      ["Stay", "Paris Airbnb in 16th arrondissement"]
-    ],
-    notes: "Paris- Get Musee D'Orsay tickets!."
-  },
-  {
-    date: "Saturday, April 25",
-    label: "Paris",
-    tag: "Sightseeing Day",
-    summary: "Main Paris sightseeing day with Musée d’Orsay, Notre-Dame, and Eiffel Tower entry in the late afternoon.",
-    timeline: [
-      {time:"Morning", title:"Musée d’Orsay", desc:"Listed as a main Paris activity for the day."},
-      {time:"Afternoon", title:"Notre-Dame", desc:"Also listed as a possible stop for the day."},
-      {time:"4:30 PM", title:"Arrive for Eiffel Tower", desc:"Planned arrival time before the 4:45 PM tour."},
-      {time:"4:45 PM", title:"Eiffel Tower tour", desc:"Address noted as 38 Av. de la Bourdonnais, Paris."},
-      {time:"Evening", title:"Dinner in Paris", desc:"Dinner still TBD."}
-    ],
-    details: [
-      ["Eiffel Tower", "Arrive 4:30 PM · Tour 4:45 PM · 38 Av. de la Bourdonnais"],
-      ["Dinner", "TBD"]
-    ],
-    notes: "This is the most sightseeing-heavy Paris day, so keeping museum timing clean will matter."
-  },
-  {
-    date: "Sunday, April 26",
-    label: "Paris → Boston",
-    tag: "Return Home",
-    summary: "Check out, head to CDG, and fly home on Delta.",
-    timeline: [
-      {time:"Morning", title:"Check out", desc:"Leave the Airbnb and prepare for airport transfer."},
-      {time:"9:45 AM", title:"Recommended pickup time", desc:"Suggested airport transfer timing. 2 Uber XLs"},
-      {time:"1:10 PM", title:"Depart Paris CDG on Delta DL 8716", desc:"Return flight to Boston."}
-    ],
-    details: [
-      ["Flight", "Delta DL 8716 · 1:10 PM from Paris CDG"],
-      ["Transfer", "Plan on 2 Uber XLs"]
-    ],
-    notes: "Final travel day. Keep passports, check-out timing, and airport transfer details locked in the night before."
-  }
+ {date:"Thursday, March 23",label:"Barcelona · Embark",tag:"Day 1 · Spain",summary:"Board Viking Star in Barcelona, settle into Penthouse Veranda 5092, and enjoy the first evening on board.",timeline:[{time:"Embarkation",title:"Board Viking Star",desc:"Penthouse Veranda guests may embark from 11 AM; stateroom access is listed for 1 PM. Exact boarding instructions and terminal will appear in your Viking documents."},{time:"Afternoon",title:"Explore the ship",desc:"Find Manfredi’s Italian Restaurant, The Chef’s Table, the Explorer’s Lounge, Wintergarden and Nordic Spa. Make a plan for the two specialty dining venues."},{time:"Evening",title:"Barcelona at night",desc:"Enjoy dinner onboard or consider an independent walk in the city if Viking’s port arrangements allow."}],details:[["Ship","Viking Star · PV1 · Stateroom 5092 · Deck 5"],["Port","Barcelona, Spain · embarkation"],["Status","Cruise sailing and cabin details shown in Viking reservation screen"]],notes:"Check-in location, all-aboard time, and any airport/hotel transfer are not yet provided."},
+ {date:"Friday, March 24",label:"Barcelona",tag:"Day 2 · Spain",summary:"A second day in Barcelona before the ship continues along the Mediterranean coast.",timeline:[{time:"Morning · suggested",title:"Gaudí architecture",desc:"Consider Sagrada Família and Passeig de Gràcia. Reserve timed-entry tickets separately if planning an independent visit."},{time:"Midday · suggested",title:"Gothic Quarter",desc:"Explore the old town and enjoy lunch or tapas."},{time:"Afternoon · suggested",title:"Waterfront or Park Güell",desc:"Choose a relaxed waterfront walk or another advance-ticket Gaudí attraction, depending on the ship’s departure schedule."}],details:[["Port","Barcelona · overnight port call from Day 1"],["Tours","One included shore excursion per port is part of Viking’s standard ocean offering; availability and specifics TBD"]],notes:"Avoid scheduling independent activities too close to the ship’s departure. Viking’s final port times take precedence."},
+ {date:"Saturday, March 25",label:"Sète",tag:"Day 3 · France",summary:"Discover the canals and waterfront atmosphere of Sète in southern France.",timeline:[{time:"Morning · suggested",title:"Explore central Sète",desc:"Stroll the canals, quays and fish-market district; the compact center makes an appealing easygoing day."},{time:"Optional excursion",title:"Regional touring",desc:"Review Viking’s choices for Montpellier, Canal du Midi or nearby Mediterranean villages once shore excursions are published."},{time:"Afternoon · suggested",title:"Waterfront lunch",desc:"Try regional seafood, then return to the ship with enough buffer before departure."}],details:[["Port","Sète, France"],["Excursions","Not selected or confirmed"]],notes:"Tours, meeting times and docking times are pending."},
+ {date:"Sunday, March 26",label:"Marseille",tag:"Day 4 · France",summary:"A day in Marseille, gateway to Provence and the Mediterranean coast.",timeline:[{time:"Morning · suggested",title:"Vieux-Port and Le Panier",desc:"Walk the historic Old Port and streets of Le Panier, depending on the location of Viking’s shuttle or excursion drop-off."},{time:"Optional excursion",title:"Provence or Calanques",desc:"Compare Viking’s excursions to Aix-en-Provence or the dramatic Calanques coast when the offerings open."},{time:"Afternoon · suggested",title:"Notre-Dame de la Garde",desc:"Consider viewpoints over Marseille, allowing travel time back to the pier."}],details:[["Port","Marseille, France"],["Excursions","Not selected or confirmed"]],notes:"Some Marseille cruise berths are distant from the historic center; check transport arrangements."},
+ {date:"Monday, March 27",label:"Monte Carlo",tag:"Day 5 · Monaco",summary:"Experience Monaco’s harbor, old town and celebrated Riviera scenery.",timeline:[{time:"Morning · suggested",title:"Monaco-Ville and Prince’s Palace",desc:"Explore the elevated old town and enjoy its Mediterranean vistas."},{time:"Midday · suggested",title:"Monte Carlo",desc:"See Casino Square and the gardens surrounding the Casino de Monte-Carlo."},{time:"Optional excursion",title:"French Riviera touring",desc:"Review Viking shore excursion options for Monaco and nearby Riviera towns."}],details:[["Port","Monte Carlo, Monaco"],["Excursions","Not selected or confirmed"]],notes:"Docking versus tender operations may change; verify the final arrangements."},
+ {date:"Tuesday, March 28",label:"Livorno · Tuscany",tag:"Day 6 · Italy",summary:"First of two days in Livorno for Florence, Pisa and the Tuscan countryside.",timeline:[{time:"Full day · suggested",title:"Florence",desc:"Consider an excursion or booked transfer to Florence for the Duomo area, Ponte Vecchio and Renaissance sights. Museum visits need separate timed reservations."},{time:"Alternative",title:"Pisa",desc:"Visit Piazza dei Miracoli and see the Leaning Tower as a less intensive option."},{time:"Evening",title:"Overnight in Livorno",desc:"With an overnight stay, explore your options for a second Tuscany outing tomorrow."}],details:[["Port","Livorno (Florence/Pisa), Italy"],["Status","Overnight in port"],["Excursions","Not selected or confirmed"]],notes:"Florence is a significant drive from Livorno; prioritize a dependable return transfer."},
+ {date:"Wednesday, March 29",label:"Livorno · Tuscany",tag:"Day 7 · Italy",summary:"Second day in Tuscany, with flexibility to visit another city or enjoy a slower pace.",timeline:[{time:"Morning · suggested",title:"Pisa, Lucca or more Florence",desc:"If you visited Florence yesterday, consider a different Tuscany destination today."},{time:"Midday · suggested",title:"Tuscan food and local sights",desc:"Explore a guided culinary option or relax in Livorno."},{time:"Evening",title:"Final night on Viking Star",desc:"Pack, review departure instructions, and enjoy a final dinner onboard."}],details:[["Port","Livorno (Florence/Pisa), Italy"],["Excursions","Not selected or confirmed"]],notes:"Final disembarkation instructions for March 30 will be provided by Viking onboard."},
+ {date:"Thursday, March 30",label:"Rome · Disembark",tag:"Day 8 · Italy",summary:"Disembark in Civitavecchia, the cruise port serving Rome.",timeline:[{time:"Morning",title:"Disembark Viking Star",desc:"Follow Viking’s assigned baggage and disembarkation procedures."},{time:"After disembarkation",title:"Transfer to Rome or airport",desc:"Arrange transport to central Rome or Rome Fiumicino Airport (FCO); confirm transfer availability and timing before booking onward travel."},{time:"Optional",title:"Extend the trip in Rome",desc:"If you plan to spend more time in Italy, consider the Colosseum, Roman Forum and Vatican area."}],details:[["Port","Civitavecchia (Rome), Italy"],["End date","March 30, 2028"],["Transfers","Not yet supplied"]],notes:"Civitavecchia is outside central Rome. Do not assume the ship docks in Rome itself."}
 ];
-
-const tripNotesTuesday = [
-  {time:"Support", title:"Viking En Route Travel Support", desc:"Phone: +1-877-523-0576 · Text: +1-818-804-4699"},
-  {time:"Packing", title:"Must-have travel items", desc:"Converters: Type G for London and Type C for France / Amsterdam. Also corded headphones, Apple Pay setup, sleep mask, face mask, and backup battery."}
+const tripNotes = [
+ {time:"Reservation",title:"Your cruise selection",desc:"Viking Star · 2 guests · Penthouse Veranda PV1 · Stateroom 5092, Deck 5 · March 23–30, 2028."},
+ {time:"Fare snapshot",title:"Price shown in Viking screenshot",desc:"$5,499 per guest; $10,998 total cruise fare including listed port taxes and fees. Screen shows FALL SALE and $1,500 reduction from $12,498. This is a quote screenshot, not a verified paid booking or guaranteed final fare."},
+ {time:"Oct 28, 2027",title:"Shore excursion booking window",desc:"Published Penthouse Veranda priority: 147 days before embarkation. Confirm the exact opening time in My Viking Journey."},
+ {time:"Jan 13, 2028",title:"Dining and spa booking windows",desc:"Published Penthouse Veranda priority: 70 days before embarkation. Two priority reservations at each alternative restaurant; spa treatment bookings open on the same schedule."},
+ {time:"Cabin amenities",title:"Penthouse Veranda features",desc:"338 sq. ft. category; veranda, welcome champagne, coffee machine, binoculars, daily-replenished minibar with beverages and snacks, 24-hour room service, and complimentary pressing/shoe shine according to Viking’s published benefits."},
+ {time:"Offers · unverified",title:"Ask Viking about promotions",desc:"Codes saved for comparison: BVT26 (beverage/gratuity offer), SBT26 (shipboard credit), WBNRMD1013 (webinar offer), FBP26 (existing-booking offer). Expiration, stacking, returning-guest and rebooking eligibility must be verified by Viking. No offer is assumed applied."},
+ {time:"Before travel",title:"To be added when confirmed",desc:"Flights, pre-cruise Barcelona hotel, post-cruise Rome hotel, transfers, excursions, dining reservations, travel insurance and any final booking reference."}
 ];
-
-const tripNotesSupportOnly = [
-  {time:"Support", title:"Viking En Route Travel Support", desc:"Phone: +1-877-523-0576 · Text: +1-818-804-4699"}
-];
-
-let currentIndex = 0;
-
-const dayList = document.getElementById("dayList");
-const daySelect = document.getElementById("daySelect");
-const dayHeading = document.getElementById("dayHeading");
-const daySummary = document.getElementById("daySummary");
-const dayTag = document.getElementById("dayTag");
-const timeline = document.getElementById("timeline");
-const detailsGrid = document.getElementById("detailsGrid");
-const notesBox = document.getElementById("notesBox");
-const notesSection = document.getElementById("notesSection");
-const globalNotes = document.getElementById("globalNotes");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-
-function renderNav() {
-  dayList.innerHTML = "";
-  daySelect.innerHTML = "";
-  days.forEach((day, idx) => {
-    const btn = document.createElement("button");
-    btn.className = "day-btn" + (idx === currentIndex ? " active" : "");
-    btn.innerHTML = `<span class="date">${day.date}</span><span class="label">${day.label}</span>`;
-    btn.addEventListener("click", () => { currentIndex = idx; renderAll(); });
-    dayList.appendChild(btn);
-
-    const option = document.createElement("option");
-    option.value = String(idx);
-    option.textContent = `${day.date} — ${day.label}`;
-    if (idx === currentIndex) option.selected = true;
-    daySelect.appendChild(option);
-  });
-}
-
-function renderDay() {
-  const day = days[currentIndex];
-  dayHeading.textContent = `${day.date} — ${day.label}`;
-  daySummary.textContent = day.summary;
-  dayTag.textContent = day.tag;
-
-  timeline.innerHTML = "";
-  day.timeline.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <div class="item-time">${item.time}</div>
-      <div class="item-title">${item.title}</div>
-      <div class="item-desc">${item.desc}</div>
-    `;
-    timeline.appendChild(div);
-  });
-
-  detailsGrid.innerHTML = "";
-  day.details.forEach(([k,v]) => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <div class="item-time">${k}</div>
-      <div class="item-title">${v}</div>
-    `;
-    detailsGrid.appendChild(div);
-  });
-
-  if (day.notes && day.notes.trim()) {
-    notesBox.textContent = day.notes;
-    notesSection.style.display = "block";
-  } else {
-    notesBox.textContent = "";
-    notesSection.style.display = "none";
-  }
-  prevBtn.disabled = currentIndex === 0;
-  nextBtn.disabled = currentIndex === days.length - 1;
-  prevBtn.style.opacity = currentIndex === 0 ? .5 : 1;
-  nextBtn.style.opacity = currentIndex === days.length - 1 ? .5 : 1;
-  daySelect.value = String(currentIndex);
-}
-
-function renderGlobalNotes() {
-  globalNotes.innerHTML = "";
-  const notesToShow = currentIndex === 0 ? tripNotesTuesday : tripNotesSupportOnly;
-  notesToShow.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <div class="item-time">${item.time}</div>
-      <div class="item-title">${item.title}</div>
-      <div class="item-desc">${item.desc}</div>
-    `;
-    globalNotes.appendChild(div);
-  });
-}
-
-function renderAll() {
-  renderNav();
-  renderDay();
-  renderGlobalNotes();
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-prevBtn.addEventListener("click", () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    renderAll();
-  }
-});
-
-nextBtn.addEventListener("click", () => {
-  if (currentIndex < days.length - 1) {
-    currentIndex++;
-    renderAll();
-  }
-});
-
-daySelect.addEventListener("change", (e) => {
-  currentIndex = Number(e.target.value);
-  renderAll();
-});
-
-renderAll();
-</script>
-</body>
-</html>
+let currentIndex=0;
+const $=id=>document.getElementById(id);
+function renderNav(){ $('dayList').innerHTML='';$('daySelect').innerHTML='';days.forEach((d,i)=>{const btn=document.createElement('button');btn.className='day-btn'+(i===currentIndex?' active':'');btn.innerHTML=`<span class="date">${d.date}</span><span class="label">${d.label}</span>`;btn.onclick=()=>{currentIndex=i;renderAll()};$('dayList').appendChild(btn);const op=document.createElement('option');op.value=i;op.textContent=d.date+' — '+d.label;$('daySelect').appendChild(op)});$('daySelect').value=String(currentIndex)}
+function makeItem(item){const el=document.createElement('div');el.className='item';el.innerHTML=`<div class="item-time">${item.time}</div><div class="item-title">${item.title}</div><div class="item-desc">${item.desc}</div>`;return el}
+function renderDay(){const d=days[currentIndex];$('dayHeading').textContent=d.date+' — '+d.label;$('daySummary').textContent=d.summary;$('dayTag').textContent=d.tag;$('timeline').replaceChildren(...d.timeline.map(makeItem));$('detailsGrid').replaceChildren(...d.details.map(([a,b])=>{const div=document.createElement('div');div.className='item';div.innerHTML=`<div class="item-time">${a}</div><div class="item-title">${b}</div>`;return div}));$('notesSection').style.display=d.notes?'block':'none';$('notesBox').textContent=d.notes||'';$('prevBtn').disabled=currentIndex===0;$('nextBtn').disabled=currentIndex===days.length-1;$('prevBtn').style.opacity=currentIndex===0?'.5':1;$('nextBtn').style.opacity=currentIndex===days.length-1?'.5':1}
+function renderAll(){renderNav();renderDay();window.scrollTo({top:0,behavior:'smooth'})}
+$('globalNotes').replaceChildren(...tripNotes.map(makeItem));$('prevBtn').onclick=()=>{if(currentIndex>0){currentIndex--;renderAll()}};$('nextBtn').onclick=()=>{if(currentIndex<days.length-1){currentIndex++;renderAll()}};$('daySelect').onchange=e=>{currentIndex=Number(e.target.value);renderAll()};
+const remaining=Math.ceil((new Date('2028-03-23T00:00:00').getTime()-Date.now())/86400000);$('countdown').textContent=remaining>0?`${remaining} days`:remaining===0?'Sailing today':'Sailing date passed';renderAll();
+</script></body></html>
