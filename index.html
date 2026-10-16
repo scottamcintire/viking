@@ -234,19 +234,21 @@
     .day-title h2{font-size:24px}
   }
 
-  .overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+  .overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
   .metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px}
   .metric b{display:block;font-size:21px;color:var(--accent2);margin:5px 0}
   .metric small{color:var(--muted)}
   .links a{display:inline-block;margin:6px 9px 6px 0;color:var(--accent2);font-weight:650}
   .note{white-space:pre-line}
   .footer-note a{color:var(--accent2)}
+  @media(max-width:900px){.overview{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:640px){.overview{grid-template-columns:1fr}}
 </style></head><body>
 <div class="app"><aside class="sidebar"><div class="brand">Mediterranean 2028</div><div class="sub">Viking Star · Barcelona → Rome<br>March 23–30, 2028</div><div class="day-list" id="dayList"></div></aside>
 <main class="main"><div class="mobile-jump"><select id="daySelect" aria-label="Choose a day"></select></div>
 <section class="hero"><h1>Viking Star · Mediterranean 2028</h1><p>Iconic Western Mediterranean | March 23–30, 2028 | Barcelona → Rome (Civitavecchia)<br>2 guests · Penthouse Veranda PV1 · Deck 5</p></section>
-<div class="overview"><div class="metric"><small>Departure countdown</small><b id="countdown">—</b><small>Until March 23, 2028</small></div><div class="metric"><small>Shore excursions open</small><b>Oct 28, 2027</b><small>147 days before sailing</small></div><div class="metric"><small>Dining & spa open</small><b>Jan 13, 2028</b><small>70 days before sailing</small></div></div>
+<div class="overview"><div class="metric"><small>Departure countdown</small><b id="countdown">—</b><small>Until March 23, 2028</small></div><div class="metric"><small>Final payment due*</small><b>Jun 10, 2027</b><small>October offer terms; verify invoice</small></div><div class="metric"><small>Shore excursions open</small><b>Oct 28, 2027</b><small>147 days before sailing</small></div><div class="metric"><small>Dining & spa open</small><b>Jan 13, 2028</b><small>70 days before sailing</small></div></div>
+<div class="footer-note" style="margin:-6px 0 16px">*June 10, 2027 is the full-payment deadline stated in the October Viking promotion, not a confirmed deadline from your personal invoice. Check your booking confirmation.</div>
 <div class="nav-row"><button class="secondary" id="prevBtn">← Previous Day</button><button id="nextBtn">Next Day →</button></div>
 <section class="card"><div class="day-title"><div><h2 id="dayHeading"></h2><div class="summary" id="daySummary"></div></div><div class="tag" id="dayTag"></div></div>
 <div class="section-title">Plan for the day</div><div class="timeline" id="timeline"></div>
@@ -268,6 +270,7 @@ const days = [
 ];
 const tripNotes = [
  {time:"Reservation",title:"Your cruise selection",desc:"Viking Star · 2 guests · Penthouse Veranda PV1 · Deck 5 · March 23–30, 2028."},
+ {time:"Jun 10, 2027 · verify",title:"Final payment deadline — October offer",desc:"Viking’s October offer stated full payment was due June 10, 2027 for applicable cruises. Confirm the date on your own invoice or booking confirmation; it may differ."},
  {time:"Oct 28, 2027",title:"Shore excursion booking window",desc:"Published Penthouse Veranda priority: 147 days before embarkation. Confirm the exact opening time in My Viking Journey."},
  {time:"Jan 13, 2028",title:"Dining and spa booking windows",desc:"Published Penthouse Veranda priority: 70 days before embarkation. Two priority reservations at each alternative restaurant; spa treatment bookings open on the same schedule."},
  {time:"Cabin amenities",title:"Penthouse Veranda features",desc:"338 sq. ft. category; veranda, welcome champagne, coffee machine, binoculars, daily-replenished minibar with beverages and snacks, 24-hour room service, and complimentary pressing/shoe shine according to Viking’s published benefits."},
