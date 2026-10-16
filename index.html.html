@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="robots" content="noindex,nofollow"><title>Viking Star • Mediterranean 2028</title><style>
+  :root{
+    --bg:#f7f7f5;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --accent:#0f766e;
+    --accent2:#134e4a;
+    --soft:#ecfdf5;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  .app{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    min-height:100vh;
+  }
+  .sidebar{
+    background:#fff;
+    border-right:1px solid var(--line);
+    padding:20px 16px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:auto;
+  }
+  .brand{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:18px;
+    line-height:1.4;
+  }
+  .day-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .day-btn{
+    width:100%;
+    text-align:left;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:12px;
+    padding:12px 14px;
+    cursor:pointer;
+    transition:.15s ease;
+  }
+  .day-btn:hover{border-color:#cbd5e1;background:#fafafa}
+  .day-btn.active{
+    border-color:var(--accent);
+    background:var(--soft);
+  }
+  .day-btn .date{
+    display:block;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:2px;
+  }
+  .day-btn .label{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+  }
+  .main{
+    padding:24px;
+    max-width:980px;
+    width:100%;
+    margin:0 auto;
+  }
+  .mobile-jump{
+    display:none;
+    margin-bottom:16px;
+  }
+  select{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    font-size:16px;
+    background:white;
+  }
+  .hero{
+    background:linear-gradient(135deg,#ffffff,#f0fdfa);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    margin:0 0 6px 0;
+    font-size:30px;
+  }
+  .hero p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  .nav-row{
+    display:flex;
+    gap:10px;
+    margin:16px 0 22px;
+    flex-wrap:wrap;
+  }
+  .nav-row button{
+    border:none;
+    background:var(--accent);
+    color:white;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .nav-row button.secondary{
+    background:#e5f3f1;
+    color:var(--accent2);
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:16px;
+  }
+  .day-title{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .day-title h2{
+    margin:0;
+    font-size:28px;
+  }
+  .tag{
+    background:var(--soft);
+    color:var(--accent2);
+    border:1px solid #c7f0df;
+    padding:8px 10px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+  }
+  .summary{
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.55;
+    margin-bottom:18px;
+  }
+  .section-title{
+    font-size:14px;
+    font-weight:800;
+    color:var(--accent2);
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin:18px 0 10px;
+  }
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .item{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+  }
+  .item-time{
+    color:var(--accent2);
+    font-weight:800;
+    font-size:13px;
+    margin-bottom:4px;
+  }
+  .item-title{
+    font-weight:700;
+    margin-bottom:4px;
+    font-size:17px;
+  }
+  .item-desc{
+    color:var(--muted);
+    line-height:1.5;
+    font-size:15px;
+  }
+  .item-desc p{
+    margin:0 0 8px 0;
+  }
+  .item-desc ul{
+    margin:0;
+    padding-left:18px;
+  }
+  .item-desc li{
+    margin:0 0 4px 0;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+  .note{
+    background:#fffbeb;
+    border:1px solid #fde68a;
+    border-radius:14px;
+    padding:14px;
+    color:#7c5e10;
+    line-height:1.5;
+  }
+  .footer-note{
+    color:var(--muted);
+    font-size:14px;
+    margin-top:16px;
+  }
+  @media (max-width: 900px){
+    .app{grid-template-columns:1fr}
+    .sidebar{display:none}
+    .main{padding:16px}
+    .mobile-jump{display:block}
+  }
+  @media (max-width: 640px){
+    .grid{grid-template-columns:1fr}
+    .hero h1{font-size:24px}
+    .day-title h2{font-size:24px}
+  }
+
+  .overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px}
+  .metric b{display:block;font-size:21px;color:var(--accent2);margin:5px 0}
+  .metric small{color:var(--muted)}
+  .links a{display:inline-block;margin:6px 9px 6px 0;color:var(--accent2);font-weight:650}
+  .note{white-space:pre-line}
+  .footer-note a{color:var(--accent2)}
+  @media(max-width:640px){.overview{grid-template-columns:1fr}}
+</style></head><body>
+<div class="app"><aside class="sidebar"><div class="brand">Mediterranean 2028</div><div class="sub">Viking Star · Barcelona → Rome<br>March 23–30, 2028</div><div class="day-list" id="dayList"></div></aside>
+<main class="main"><div class="mobile-jump"><select id="daySelect" aria-label="Choose a day"></select></div>
+<section class="hero"><h1>Viking Star · Mediterranean 2028</h1><p>Iconic Western Mediterranean | March 23–30, 2028 | Barcelona → Rome (Civitavecchia)<br>2 guests · Penthouse Veranda PV1 · Deck 5</p></section>
+<div class="overview"><div class="metric"><small>Departure countdown</small><b id="countdown">—</b><small>Until March 23, 2028</small></div><div class="metric"><small>Shore excursions open</small><b>Oct 28, 2027</b><small>147 days before sailing</small></div><div class="metric"><small>Dining & spa open</small><b>Jan 13, 2028</b><small>70 days before sailing</small></div></div>
+<div class="nav-row"><button class="secondary" id="prevBtn">← Previous Day</button><button id="nextBtn">Next Day →</button></div>
+<section class="card"><div class="day-title"><div><h2 id="dayHeading"></h2><div class="summary" id="daySummary"></div></div><div class="tag" id="dayTag"></div></div>
+<div class="section-title">Plan for the day</div><div class="timeline" id="timeline"></div>
+<div class="section-title">Key details</div><div class="grid" id="detailsGrid"></div><div id="notesSection"><div class="section-title">Notes</div><div class="note" id="notesBox"></div></div>
+<div class="footer-note">Sightseeing is suggested, not reserved. Confirm all docking times, excursion selections and transfers through Viking before travel.</div></section>
+<section class="card"><div class="section-title">Cruise details & reminders</div><div class="timeline" id="globalNotes"></div></section>
+<section class="card"><div class="section-title">Useful official links</div><div class="links"><a href="https://www.vikingcruises.com/oceans/cruise-destinations/western-mediterranean/iconic-western-mediterranean/index.html?year=2028&amp;startLocation=barcelona&amp;endLocation=rome" target="_blank" rel="noopener">Viking itinerary ↗</a><a href="https://www.vikingcruises.com/oceans/ships/viking-star.html" target="_blank" rel="noopener">Viking Star ↗</a><a href="https://www.myvikingjourney.com/" target="_blank" rel="noopener">My Viking Journey ↗</a></div></section>
+</main></div>
+<script>
+const days = [
+ {date:"Thursday, March 23",label:"Barcelona · Embark",tag:"Day 1 · Spain",summary:"Board Viking Star in Barcelona, settle into Penthouse Veranda, and enjoy the first evening on board.",timeline:[{time:"Embarkation",title:"Board Viking Star",desc:"Penthouse Veranda guests may embark from 11 AM; stateroom access is listed for 1 PM. Exact boarding instructions and terminal will appear in your Viking documents."},{time:"Afternoon",title:"Explore the ship",desc:"Find Manfredi’s Italian Restaurant, The Chef’s Table, the Explorer’s Lounge, Wintergarden and Nordic Spa. Make a plan for the two specialty dining venues."},{time:"Evening",title:"Barcelona at night",desc:"Enjoy dinner onboard or consider an independent walk in the city if Viking’s port arrangements allow."}],details:[["Ship","Viking Star · PV1 · Deck 5"],["Port","Barcelona, Spain · embarkation"],["Status","Cruise sailing and cabin details shown in Viking reservation screen"]],notes:"Check-in location, all-aboard time, and any airport/hotel transfer are not yet provided."},
+ {date:"Friday, March 24",label:"Barcelona",tag:"Day 2 · Spain",summary:"A second day in Barcelona before the ship continues along the Mediterranean coast.",timeline:[{time:"Morning · suggested",title:"Gaudí architecture",desc:"Consider Sagrada Família and Passeig de Gràcia. Reserve timed-entry tickets separately if planning an independent visit."},{time:"Midday · suggested",title:"Gothic Quarter",desc:"Explore the old town and enjoy lunch or tapas."},{time:"Afternoon · suggested",title:"Waterfront or Park Güell",desc:"Choose a relaxed waterfront walk or another advance-ticket Gaudí attraction, depending on the ship’s departure schedule."}],details:[["Port","Barcelona · overnight port call from Day 1"],["Tours","One included shore excursion per port is part of Viking’s standard ocean offering; availability and specifics TBD"]],notes:"Avoid scheduling independent activities too close to the ship’s departure. Viking’s final port times take precedence."},
+ {date:"Saturday, March 25",label:"Sète",tag:"Day 3 · France",summary:"Discover the canals and waterfront atmosphere of Sète in southern France.",timeline:[{time:"Morning · suggested",title:"Explore central Sète",desc:"Stroll the canals, quays and fish-market district; the compact center makes an appealing easygoing day."},{time:"Optional excursion",title:"Regional touring",desc:"Review Viking’s choices for Montpellier, Canal du Midi or nearby Mediterranean villages once shore excursions are published."},{time:"Afternoon · suggested",title:"Waterfront lunch",desc:"Try regional seafood, then return to the ship with enough buffer before departure."}],details:[["Port","Sète, France"],["Excursions","Not selected or confirmed"]],notes:"Tours, meeting times and docking times are pending."},
+ {date:"Sunday, March 26",label:"Marseille",tag:"Day 4 · France",summary:"A day in Marseille, gateway to Provence and the Mediterranean coast.",timeline:[{time:"Morning · suggested",title:"Vieux-Port and Le Panier",desc:"Walk the historic Old Port and streets of Le Panier, depending on the location of Viking’s shuttle or excursion drop-off."},{time:"Optional excursion",title:"Provence or Calanques",desc:"Compare Viking’s excursions to Aix-en-Provence or the dramatic Calanques coast when the offerings open."},{time:"Afternoon · suggested",title:"Notre-Dame de la Garde",desc:"Consider viewpoints over Marseille, allowing travel time back to the pier."}],details:[["Port","Marseille, France"],["Excursions","Not selected or confirmed"]],notes:"Some Marseille cruise berths are distant from the historic center; check transport arrangements."},
+ {date:"Monday, March 27",label:"Monte Carlo",tag:"Day 5 · Monaco",summary:"Experience Monaco’s harbor, old town and celebrated Riviera scenery.",timeline:[{time:"Morning · suggested",title:"Monaco-Ville and Prince’s Palace",desc:"Explore the elevated old town and enjoy its Mediterranean vistas."},{time:"Midday · suggested",title:"Monte Carlo",desc:"See Casino Square and the gardens surrounding the Casino de Monte-Carlo."},{time:"Optional excursion",title:"French Riviera touring",desc:"Review Viking shore excursion options for Monaco and nearby Riviera towns."}],details:[["Port","Monte Carlo, Monaco"],["Excursions","Not selected or confirmed"]],notes:"Docking versus tender operations may change; verify the final arrangements."},
+ {date:"Tuesday, March 28",label:"Livorno · Tuscany",tag:"Day 6 · Italy",summary:"First of two days in Livorno for Florence, Pisa and the Tuscan countryside.",timeline:[{time:"Full day · suggested",title:"Florence",desc:"Consider an excursion or booked transfer to Florence for the Duomo area, Ponte Vecchio and Renaissance sights. Museum visits need separate timed reservations."},{time:"Alternative",title:"Pisa",desc:"Visit Piazza dei Miracoli and see the Leaning Tower as a less intensive option."},{time:"Evening",title:"Overnight in Livorno",desc:"With an overnight stay, explore your options for a second Tuscany outing tomorrow."}],details:[["Port","Livorno (Florence/Pisa), Italy"],["Status","Overnight in port"],["Excursions","Not selected or confirmed"]],notes:"Florence is a significant drive from Livorno; prioritize a dependable return transfer."},
+ {date:"Wednesday, March 29",label:"Livorno · Tuscany",tag:"Day 7 · Italy",summary:"Second day in Tuscany, with flexibility to visit another city or enjoy a slower pace.",timeline:[{time:"Morning · suggested",title:"Pisa, Lucca or more Florence",desc:"If you visited Florence yesterday, consider a different Tuscany destination today."},{time:"Midday · suggested",title:"Tuscan food and local sights",desc:"Explore a guided culinary option or relax in Livorno."},{time:"Evening",title:"Final night on Viking Star",desc:"Pack, review departure instructions, and enjoy a final dinner onboard."}],details:[["Port","Livorno (Florence/Pisa), Italy"],["Excursions","Not selected or confirmed"]],notes:"Final disembarkation instructions for March 30 will be provided by Viking onboard."},
+ {date:"Thursday, March 30",label:"Rome · Disembark",tag:"Day 8 · Italy",summary:"Disembark in Civitavecchia, the cruise port serving Rome.",timeline:[{time:"Morning",title:"Disembark Viking Star",desc:"Follow Viking’s assigned baggage and disembarkation procedures."},{time:"After disembarkation",title:"Transfer to Rome or airport",desc:"Arrange transport to central Rome or Rome Fiumicino Airport (FCO); confirm transfer availability and timing before booking onward travel."},{time:"Optional",title:"Extend the trip in Rome",desc:"If you plan to spend more time in Italy, consider the Colosseum, Roman Forum and Vatican area."}],details:[["Port","Civitavecchia (Rome), Italy"],["End date","March 30, 2028"],["Transfers","Not yet supplied"]],notes:"Civitavecchia is outside central Rome. Do not assume the ship docks in Rome itself."}
+];
+const tripNotes = [
+ {time:"Reservation",title:"Your cruise selection",desc:"Viking Star · 2 guests · Penthouse Veranda PV1 · Deck 5 · March 23–30, 2028."},
+ {time:"Oct 28, 2027",title:"Shore excursion booking window",desc:"Published Penthouse Veranda priority: 147 days before embarkation. Confirm the exact opening time in My Viking Journey."},
+ {time:"Jan 13, 2028",title:"Dining and spa booking windows",desc:"Published Penthouse Veranda priority: 70 days before embarkation. Two priority reservations at each alternative restaurant; spa treatment bookings open on the same schedule."},
+ {time:"Cabin amenities",title:"Penthouse Veranda features",desc:"338 sq. ft. category; veranda, welcome champagne, coffee machine, binoculars, daily-replenished minibar with beverages and snacks, 24-hour room service, and complimentary pressing/shoe shine according to Viking’s published benefits."},
+ {time:"Offers · unverified",title:"Ask Viking about promotions",desc:"Codes saved for comparison: BVT26 (beverage/gratuity offer), SBT26 (shipboard credit), WBNRMD1013 (webinar offer), FBP26 (existing-booking offer). Expiration, stacking, returning-guest and rebooking eligibility must be verified by Viking. No offer is assumed applied."},
+ {time:"Before travel",title:"To be added when confirmed",desc:"Flights, pre-cruise Barcelona hotel, post-cruise Rome hotel, transfers, excursions, dining reservations, travel insurance and any final booking reference."}
+];
+let currentIndex=0;
+const $=id=>document.getElementById(id);
+function renderNav(){ $('dayList').innerHTML='';$('daySelect').innerHTML='';days.forEach((d,i)=>{const btn=document.createElement('button');btn.className='day-btn'+(i===currentIndex?' active':'');btn.innerHTML=`<span class="date">${d.date}</span><span class="label">${d.label}</span>`;btn.onclick=()=>{currentIndex=i;renderAll()};$('dayList').appendChild(btn);const op=document.createElement('option');op.value=i;op.textContent=d.date+' — '+d.label;$('daySelect').appendChild(op)});$('daySelect').value=String(currentIndex)}
+function makeItem(item){const el=document.createElement('div');el.className='item';el.innerHTML=`<div class="item-time">${item.time}</div><div class="item-title">${item.title}</div><div class="item-desc">${item.desc}</div>`;return el}
+function renderDay(){const d=days[currentIndex];$('dayHeading').textContent=d.date+' — '+d.label;$('daySummary').textContent=d.summary;$('dayTag').textContent=d.tag;$('timeline').replaceChildren(...d.timeline.map(makeItem));$('detailsGrid').replaceChildren(...d.details.map(([a,b])=>{const div=document.createElement('div');div.className='item';div.innerHTML=`<div class="item-time">${a}</div><div class="item-title">${b}</div>`;return div}));$('notesSection').style.display=d.notes?'block':'none';$('notesBox').textContent=d.notes||'';$('prevBtn').disabled=currentIndex===0;$('nextBtn').disabled=currentIndex===days.length-1;$('prevBtn').style.opacity=currentIndex===0?'.5':1;$('nextBtn').style.opacity=currentIndex===days.length-1?'.5':1}
+function renderAll(){renderNav();renderDay();window.scrollTo({top:0,behavior:'smooth'})}
+$('globalNotes').replaceChildren(...tripNotes.map(makeItem));$('prevBtn').onclick=()=>{if(currentIndex>0){currentIndex--;renderAll()}};$('nextBtn').onclick=()=>{if(currentIndex<days.length-1){currentIndex++;renderAll()}};$('daySelect').onchange=e=>{currentIndex=Number(e.target.value);renderAll()};
+const remaining=Math.ceil((new Date('2028-03-23T00:00:00').getTime()-Date.now())/86400000);$('countdown').textContent=remaining>0?`${remaining} days`:remaining===0?'Sailing today':'Sailing date passed';renderAll();
+</script></body></html>
